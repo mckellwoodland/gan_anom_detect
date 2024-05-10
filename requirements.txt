@@ -1,0 +1,2 @@
+argparse==1.4.0
+scikit-image==0.23.2
