@@ -14,12 +14,20 @@ docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
 
 # Evaluate reconstructions
 
-Evaluate reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional PNG images.
+Evaluate reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
 ```
-usage: eval_recon_patch.py [-h] [-d DISTANCE]
+usage: eval_recon_patch.py [-h] [-o ORIG_DIR] [-r RECON_DIR] [-d DISTANCE] [-s PATCH_SIZE]
+
+Required Arguments:
+  -o ORIG_DIR, --orig_dir ORIG_DIR
+                        Path to the directory containing the original images.
+  -r RECON_DIR, --recon_dir RECON_DIR
+                        Path to the directory containing the reconstructed images.
 
 Optional Arguments:
   -d DISTANCE, --distance DISTANCE
                         One of [MSE, WD, SS] for mean-squared error, Wasserstein distance, or Structural Similarity.
                         Defaults to MSE.
+  -s PATCH_SIZE, --patch_size PATCH_SIZE
+                        One integer representing the dimensionality of the patch to be evaluated. Defaults to 32.
 ```
