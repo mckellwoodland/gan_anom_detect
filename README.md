@@ -12,6 +12,22 @@ The container can be run interactively as follows, with the current directory be
 docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
 ```
 
+# Reconstruct images with StyleGAN2-ADA
+
+Build the Docker container.
+```
+docker build --tag sg2ada:latest stylegan2-ada-pytorch/.
+```
+
+Reconstruct images.
+```
+stylegan2-ada-pytorch/docker_run.sh python stylegan2-ada-pytorch/projector.py \
+						--network {MODEL_PKL} \
+						--target {INPUT_DIR} \
+						--save-video False \
+						--outdir {OUTPUT_DIR}
+```
+
 # Evaluate reconstructions
 
 Evaluate reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
