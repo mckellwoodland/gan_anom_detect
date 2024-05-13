@@ -7,30 +7,69 @@ This code was built with Python 3 with package versions listed in the `requireme
 ```
 docker build --tag gan_anom_detect .
 ```
-The container can be run interactively as follows, with the current directory being mounted:
-```
-docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
-```
 
-# Reconstruct images with StyleGAN2-ADA
-
-Build the Docker container.
+To reconstruct images using the StyleGAN2-ADA code, you'll also need the following container.
 ```
 docker build --tag sg2ada:latest stylegan2-ada-pytorch/.
 ```
 
-Reconstruct images.
+Our Python scripts can either be run directly after entering the Docker container by providing the appropriate arguments
 ```
-stylegan2-ada-pytorch/docker_run.sh python stylegan2-ada-pytorch/projector.py \
-						--network {MODEL_PKL} \
-						--target {INPUT_DIR} \
-						--save-video False \
-						--outdir {OUTPUT_DIR}
+docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
+```
+or by editing the bash scripts with your arguments. The bash script will run the container and provide the arguments to the script for you. You may need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
+
+# Reconstruct images with StyleGAN2-ADA
+
+This code uses the official StyleGAN2-ADA repository to reconstruct the images with the trained StyleGAN2-ADA model via backpropagation.
+
+Provide the path to the model weights `MODEL_PKL`, the path to the directory containing the original images `INPUT_DIR`, and the path to the directory to put the reconstructed images into `OUTPUT_DIR` to the `projector.sh` script.
+
+```
+./scripts/projector.sh
+```
+```
+Usage: projector.py [OPTIONS]
+
+  Project given image to the latent space of pretrained network pickle.
+
+  Examples:
+
+  python projector.py --outdir=out --target=~/mytargetimg.png \
+      --network=https://nvlabs-fi-cdn.nvidia.com/stylegan2-ada-pytorch/pretrained/ffhq.pkl
+
+Options:
+  --network TEXT        Network pickle filename  [required]
+  --target FILE         Target image file to project to  [required]
+  --num-steps INTEGER   Number of optimization steps  [default: 1000]
+  --seed INTEGER        Random seed  [default: 303]
+  --save-video BOOLEAN  Save an mp4 video of optimization progress  [default:
+                        True]
+  --outdir DIR          Where to save the output images  [required]
+  --help                Show this message and exit.
+```
+
+To decide on the model weights to use, we provide a script `find_best_fid.sh` to localize the StyleGAN2-ADA weights associated with the lowest FID score given the path to the StyleGAN2-ADA JSON results file.
+```
+./scripts/find_best_fid.sh
+```
+```
+usage: find_best_fid.py [-h] [-f FNAME]
+
+Required Arguments:
+  -f FNAME, --fname FNAME
+                        Path to the StyleGAN2-ADA output JSON file with metric information, i.e.
+                        the "metric-fid50k_full" JSON file.
 ```
 
 # Evaluate reconstructions
 
-Evaluate reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
+This code evaluated reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
+
+Provide the paths to the directories containing the original `ORIG_DIR` and reconstructed images `RECON_DIR` to the `eval_recon_patch.sh` script. The distance function `DISTANCE` and patch size `PATCH_SIZE` can also be changed from their default values of mean-squared error and 32.
+```
+./scripts/eval_recon_patch.sh
+```
 ```
 usage: eval_recon_patch.py [-h] [-o ORIG_DIR] [-r RECON_DIR] [-d DISTANCE] [-s PATCH_SIZE]
 
