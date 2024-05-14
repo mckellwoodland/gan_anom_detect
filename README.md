@@ -17,11 +17,24 @@ Our Python scripts can either be run directly after entering the Docker containe
 ```
 docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
 ```
-or by editing the bash scripts with your arguments. The bash script will run the container and provide the arguments to the script for you. You may need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
+or by editing the bash scripts with your arguments. The bash script will run the container and provide the arguments to the script for you. You will need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
+
+# Train a StyleGAN2-ADA model.
+
+You can train a StyleGAN2-ADA model with the official StyleGAN2-ADA repository (forked). While the repository and this study works with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
+
+```
+stylegan2-ada-pytorch/docker_run.sh python stylegan2-ada-pytorch/train.py --outdir {OUT_DIR} \
+                                                                          --gpus {GPUS} \
+                                                                          --data {DATA_DIR} \
+                                                                          --cfg stylegan2 \
+                                                                          --augpipe bgcfnc \
+                                                                          --gamma 8.2
+```
 
 # Reconstruct images with StyleGAN2-ADA
 
-This code uses the official StyleGAN2-ADA repository to reconstruct the images with the trained StyleGAN2-ADA model via backpropagation.
+This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory. 
 
 Provide the path to the model weights `MODEL_PKL`, the path to the directory containing the original images `INPUT_DIR`, and the path to the directory to put the reconstructed images into `OUTPUT_DIR` to the `projector.sh` script.
 
@@ -64,7 +77,7 @@ Required Arguments:
 
 # Evaluate reconstructions
 
-This code evaluated reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
+This code evaluates reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
 
 Provide the paths to the directories containing the original `ORIG_DIR` and reconstructed images `RECON_DIR` to the `eval_recon_patch.sh` script. The distance function `DISTANCE` and patch size `PATCH_SIZE` can also be changed from their default values of mean-squared error and 32.
 ```
