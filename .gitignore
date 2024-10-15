@@ -1,5 +1,6 @@
 data/
 figures/
+gan_training/
 images/
 models/
 logs/
