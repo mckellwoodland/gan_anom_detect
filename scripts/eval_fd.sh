@@ -8,7 +8,7 @@ OUTPATH = ""
 BATCH_SIZE = ""
 
 # Run script.
-docker run --rm -v $(pwd):/workspace gan_anom_detect python Pytorch-StudioGAN/src/evaluate.py \
+docker run --rm -v $(pwd):/workspace alex4727/experiment:pytorch113_cuda116 python Pytorch-StudioGAN/src/evaluate.py \
                                                                                 -metrics fid \
                                                                                 --dset1 $DSET1 \
                                                                                 --dset2 $DSET2 \
