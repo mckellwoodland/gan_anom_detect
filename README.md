@@ -86,7 +86,7 @@ Required Arguments:
                         the "metric-fid50k_full" JSON file.
 ```
 
-Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>1<\sup> by providing the path to the real dataset `DSET1`, the path to the fake dataset `DSET2`, either the InceptionV3 `InceptionV3_torch`<sup>2<\sup> or `SwAV_torch`<sup>3<\sup> backbones `BACKBONE`, and the txt file path to put the logs into `OUTPATH` to the `eval_fd.sh` script. The batch size `BATCH_SIZE` argument can also be updated if memory issues are encountered.
+Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>1</sup> by providing the path to the real dataset `DSET1`, the path to the fake dataset `DSET2`, either the InceptionV3 `InceptionV3_torch`<sup>2</sup> or `SwAV_torch`<sup>3</sup> backbones `BACKBONE`, and the txt file path to put the logs into `OUTPATH` to the `eval_fd.sh` script. The batch size `BATCH_SIZE` argument can also be updated if memory issues are encountered.
 
 The StudioGAN docker container can be pulled by:
 ```
