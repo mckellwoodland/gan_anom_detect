@@ -86,28 +86,47 @@ Required Arguments:
                         the "metric-fid50k_full" JSON file.
 ```
 
-Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>1<\sup> by using the InceptionV3 `InceptionV3_torch`<sup>2<\sup> and `SwAV_torch`<sup>3<\sup> backbones.
+Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>1<\sup> by providing the path to the real dataset `DSET1`, the path to the fake dataset `DSET2`, either the InceptionV3 `InceptionV3_torch`<sup>2<\sup> or `SwAV_torch`<sup>3<\sup> backbones `BACKBONE`, and the txt file path to put the logs into `OUTPATH` to the `eval_fd.sh` script. The batch size `BATCH_SIZE` argument can also be updated if memory issues are encountered.
 
 The StudioGAN docker container can be pulled by:
 ```
 docker pull alex4727/experiment:pytorch113_cuda116
 ```
+```
+./scripts/eval_fd.sh
+```
+```
+usage: evaluate.py [-h] [-metrics EVAL_METRICS [EVAL_METRICS ...]] [--post_resizer POST_RESIZER] [--eval_backbone EVAL_BACKBONE] [--dset1 DSET1]
+                   [--dset1_feats DSET1_FEATS] [--dset1_moments DSET1_MOMENTS] [--dset2 DSET2] [--batch_size BATCH_SIZE] [--seed SEED] [-DDP]
+                   [--backend BACKEND] [-tn TOTAL_NODES] [-cn CURRENT_NODE] [--num_workers NUM_WORKERS] --out_path OUT_PATH
 
-Note that to use the ResNet50 backbone, you'll need to use our 'fid_med_eval' branch of the StudioGAN fork.
-```
-python PyTorch-StudioGAN-master/src/evaluate.py -metrics fid prdc \
-                                                --dset1 {GEN_DIR} \
-                                                --dset2 {REAL_DIR} \
-                                                --post_resizer clean \
-                                                --eval_backbone {BACKBONE} \
-                                                --out_path {LOG_PATH}
-```
-
-To get the relative Fréchet distance, divide by the Fréchet distance calculated on a random split of the real data. You may use the same commands as above to do so, except switch the `GEN_DIR` and `REAL_DIR` for the two halves of the dataset. Code for splitting a dataset into two folders is available in `utils`.
-```
-python split_datasets.py --in_dir {FULL_DIR} \
-                         --out_dir1 {HALF1_OUT_DIR} \
-                         --out_dir2 {HALF2_OUT_DIR}
+optional arguments:
+  -h, --help            show this help message and exit
+  -metrics EVAL_METRICS [EVAL_METRICS ...], --eval_metrics EVAL_METRICS [EVAL_METRICS ...]
+                        evaluation metrics to use during training, a subset list of ['fid', 'is', 'prdc'] or none
+  --post_resizer POST_RESIZER
+                        which resizer will you use to evaluate GANs in ['legacy', 'clean', 'friendly']
+  --eval_backbone EVAL_BACKBONE
+                        [InceptionV3_tf, InceptionV3_torch, ResNet50_torch, SwAV_torch, DINO_torch, Swin-T_torch]
+  --dset1 DSET1         specify the directory of the folder that contains dset1 images (real).
+  --dset1_feats DSET1_FEATS
+                        specify the path of *.npy that contains features of dset1 (real). If not specified, StudioGAN will automatically extract
+                        feat1 using the whole dset1.
+  --dset1_moments DSET1_MOMENTS
+                        specify the path of *.npy that contains moments (mu, sigma) of dset1 (real). If not specified, StudioGAN will
+                        automatically extract moments using the whole dset1.
+  --dset2 DSET2         specify the directory of the folder that contains dset2 images (fake).
+  --batch_size BATCH_SIZE
+                        batch_size for evaluation
+  --seed SEED           seed for generating random numbers
+  -DDP, --distributed_data_parallel
+  --backend BACKEND     cuda backend for DDP training \in ['nccl', 'gloo']
+  -tn TOTAL_NODES, --total_nodes TOTAL_NODES
+                        total number of nodes for training
+  -cn CURRENT_NODE, --current_node CURRENT_NODE
+                        rank of the current node
+  --num_workers NUM_WORKERS
+  --out_path OUT_PATH   output file to put metrics into
 ```
 
 # Reconstruct images with StyleGAN2-ADA
