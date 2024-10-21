@@ -5,7 +5,7 @@ DSET1 = ""
 DSET2 = ""
 BACKBONE = ""
 OUTPATH = ""
-BATCH_SIZE = ""
+BATCH_SIZE = "128"
 
 # Run script.
 docker run --rm -v $(pwd):/workspace alex4727/experiment:pytorch113_cuda116 python Pytorch-StudioGAN/src/evaluate.py \
