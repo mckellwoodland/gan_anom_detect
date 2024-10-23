@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # Set arguments.
-DSET1 = ""
-DSET2 = ""
-BACKBONE = ""
-OUTPATH = ""
-BATCH_SIZE = "128"
+DSET1="/workspace/"
+DSET2="/workspace/"
+BACKBONE="_torch"
+OUTPATH="/workspace/"
+BATCH_SIZE="64"
 
 # Run script.
-docker run --rm -v $(pwd):/workspace alex4727/experiment:pytorch113_cuda116 python Pytorch-StudioGAN/src/evaluate.py \
+docker run -it --rm -v $(pwd):/workspace alex4727/experiment:pytorch113_cuda116 python /workspace/PyTorch-StudioGAN/src/evaluate.py \
                                                                                 -metrics fid \
                                                                                 --dset1 $DSET1 \
                                                                                 --dset2 $DSET2 \
