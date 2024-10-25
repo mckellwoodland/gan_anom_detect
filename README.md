@@ -3,25 +3,43 @@ Official Repository for the paper "Generative Modeling for Anomaly Detection in 
 
 # Dependencies
 
-This code was built with Python 3 with package versions listed in the `requirements.txt` file. We also provide a Docker container that can be built by running the following command in this directory.
+This code was built with Python 3 with package versions listed in the `requirements.txt` file.
+We also provide a Docker container that can be built by running the following command in this directory.
 ```
 docker build --tag gan_anom_detect .
 ```
 
-To reconstruct images using the StyleGAN2-ADA code, you'll also need the following container.
+Our Python scripts can be run directly after entering the Docker container
+```
+docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
+```
+and providing the appropriate Python commands arguments or by editing the bash scripts with your arguments. 
+The bash script will run the container and provide the arguments to the script for you. 
+You will need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
+
+To use the StyleGAN2-ADA fork submodule, you'll need the following container:
 ```
 docker build --tag sg2ada:latest stylegan2-ada-pytorch/.
 ```
 
-Our Python scripts can either be run directly after entering the Docker container by providing the appropriate arguments
+To use the StudioGAN fork submodule, you can pull the following container:
 ```
-docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
+docker pull alex4727/experiment:pytorch113_cuda116
 ```
-or by editing the bash scripts with your arguments. The bash script will run the container and provide the arguments to the script for you. You will need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
+If you need to update PyTorch to be compatible with your GPU hardware, you can build the following Docker container:
+```
+docker build --tag studiogan:latest PyTorch-StudioGAN/.
+```
+
+Lastly, the following Docker container is compatible with the `frd-score` Python package.
+```
+docker build --tag frd:latest frd/.
+```
 
 # Train a StyleGAN2-ADA model.
 
-You can train a StyleGAN2-ADA model with the official StyleGAN2-ADA repository (forked). While the repository and this study works with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
+You can train a StyleGAN2-ADA model with the official StyleGAN2-ADA repository (forked). 
+While the repository and this study works with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
 
 ```
 stylegan2-ada-pytorch/docker_run.sh python stylegan2-ada-pytorch/train.py --outdir {OUT_DIR} \
@@ -125,10 +143,6 @@ optional arguments:
                         rank of the current node
   --num_workers NUM_WORKERS
   --out_path OUT_PATH   output file to put metrics into
-```
-The StudioGAN docker container can be pulled by:
-```
-docker pull alex4727/experiment:pytorch113_cuda116
 ```
 
 # Reconstruct images with StyleGAN2-ADA
