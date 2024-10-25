@@ -3,7 +3,7 @@
 # Set arguments.
 INPUT="/workspace/"
 OUTPUT="/workspace/"
-KERNEL_SIZE="(5,5)"
+KERNEL_SIZE="(11,11)"
 MEAN="0."
 SIGMA="0."
 TYPE="n"
