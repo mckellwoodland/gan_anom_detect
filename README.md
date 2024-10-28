@@ -17,44 +17,116 @@ and providing the appropriate Python commands arguments or by editing the bash s
 The bash script will run the container and provide the arguments to the script for you. 
 You will need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
 
-To use the StyleGAN2-ADA fork submodule, you'll need the following container:
+To use the StyleGAN2-ADA<sup>1</sup> fork submodule, you'll need the following container:
 ```
 docker build --tag sg2ada:latest stylegan2-ada-pytorch/.
 ```
 
-To use the StudioGAN fork submodule, you can pull the following container:
+To use the StudioGAN<sup>2</sup> fork submodule, you can pull the following container:
 ```
 docker pull alex4727/experiment:pytorch113_cuda116
 ```
-If you need to update PyTorch to be compatible with your GPU hardware, you can build the following Docker container:
+To use our bash scripts, you'll need the following Docker container which updated the PyTorch version:
 ```
 docker build --tag studiogan:latest PyTorch-StudioGAN/.
 ```
 
-Lastly, the following Docker container is compatible with the `frd-score` Python package.
+Lastly, the following Docker container is compatible with the `frd-score` Python package<sup>3</sup>.
 ```
 docker build --tag frd:latest frd/.
 ```
 
 # Train a StyleGAN2-ADA model.
 
-You can train a StyleGAN2-ADA model with the official StyleGAN2-ADA repository (forked). 
-While the repository and this study works with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
+Train a StyleGAN2-ADA model with the StyleGAN2-ADA repository (forked) by providing the `--outdir` and `--data` arguments to the `train.sh` script.
+The provided `Optional Arguments` in the script were the hyperparameters used to train models in our study.
+While the official repository and this study works with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
 
 ```
-stylegan2-ada-pytorch/docker_run.sh python stylegan2-ada-pytorch/train.py --outdir {OUT_DIR} \
-                                                                          --gpus {GPUS} \
-                                                                          --data {DATA_DIR} \
-                                                                          --cfg stylegan2 \
-                                                                          --augpipe bgcfnc \
-                                                                          --gamma 8.2
+./bash_scripts/train.sh
+```
+```
+Usage: train.py [OPTIONS]
+
+  Train a GAN using the techniques described in the paper "Training
+  Generative Adversarial Networks with Limited Data".
+
+  Examples:
+
+  # Train with custom dataset using 1 GPU.
+  python train.py --outdir=~/training-runs --data=~/mydataset.zip --gpus=1
+
+  # Train class-conditional CIFAR-10 using 2 GPUs.
+  python train.py --outdir=~/training-runs --data=~/datasets/cifar10.zip \
+      --gpus=2 --cfg=cifar --cond=1
+
+  # Transfer learn MetFaces from FFHQ using 4 GPUs.
+  python train.py --outdir=~/training-runs --data=~/datasets/metfaces.zip \
+      --gpus=4 --cfg=paper1024 --mirror=1 --resume=ffhq1024 --snap=10
+
+  # Reproduce original StyleGAN2 config F.
+  python train.py --outdir=~/training-runs --data=~/datasets/ffhq.zip \
+      --gpus=8 --cfg=stylegan2 --mirror=1 --aug=noaug
+
+  Base configs (--cfg):
+    auto       Automatically select reasonable defaults based on resolution
+               and GPU count. Good starting point for new datasets.
+    stylegan2  Reproduce results for StyleGAN2 config F at 1024x1024.
+    paper256   Reproduce results for FFHQ and LSUN Cat at 256x256.
+    paper512   Reproduce results for BreCaHAD and AFHQ at 512x512.
+    paper1024  Reproduce results for MetFaces at 1024x1024.
+    cifar      Reproduce results for CIFAR-10 at 32x32.
+
+  Transfer learning source networks (--resume):
+    ffhq256        FFHQ trained at 256x256 resolution.
+    ffhq512        FFHQ trained at 512x512 resolution.
+    ffhq1024       FFHQ trained at 1024x1024 resolution.
+    celebahq256    CelebA-HQ trained at 256x256 resolution.
+    lsundog256     LSUN Dog trained at 256x256 resolution.
+    <PATH or URL>  Custom network pickle.
+
+Options:
+  --outdir DIR                    Where to save the results  [required]
+  --gpus INT                      Number of GPUs to use [default: 1]
+  --snap INT                      Snapshot interval [default: 50 ticks]
+  --metrics LIST                  Comma-separated list or "none" [default:
+                                  fid50k_full]
+
+  --seed INT                      Random seed [default: 0]
+  -n, --dry-run                   Print training options and exit
+  --data PATH                     Training data (directory or zip)  [required]
+  --cond BOOL                     Train conditional model based on dataset
+                                  labels [default: false]
+
+  --subset INT                    Train with only N images [default: all]
+  --mirror BOOL                   Enable dataset x-flips [default: false]
+  --cfg [auto|stylegan2|paper256|paper512|paper1024|cifar]
+                                  Base config [default: auto]
+  --gamma FLOAT                   Override R1 gamma
+  --kimg INT                      Override training duration
+  --batch INT                     Override batch size
+  --aug [noaug|ada|fixed]         Augmentation mode [default: ada]
+  --p FLOAT                       Augmentation probability for --aug=fixed
+  --target FLOAT                  ADA target value for --aug=ada
+  --augpipe [blit|geom|color|filter|noise|cutout|bg|bgc|bgcf|bgcfn|bgcfnc]
+                                  Augmentation pipeline [default: bgc]
+  --resume PKL                    Resume training [default: noresume]
+  --freezed INT                   Freeze-D [default: 0 layers]
+  --fp32 BOOL                     Disable mixed-precision training
+  --nhwc BOOL                     Use NHWC memory format with FP16
+  --nobench BOOL                  Disable cuDNN benchmarking
+  --allow-tf32 BOOL               Allow PyTorch to use TF32 internally
+  --workers INT                   Override number of DataLoader workers
+  --beta0 FLOAT                   Beta_0
+  --help                          Show this message and exit.
 ```
 
 # Evaluate StyleGAN2's Generative Quality
 
-Generate 50,000 images using the model weights associated with the lowest Fréchet Inception Distance (FID) attained during training. Images can be generated by providing the path to the model weights `MODEL_PKL` and the path to the directory to put the generated images into `OUTPUT_DIR` to `generator.sh`.
+Generate 50,000 images using the model weights associated with the lowest Fréchet Inception Distance (FID) attained during training. 
+Images can be generated by providing `--network` and `--outdir` arguments to `generator.sh`.
 ```
-./scripts/generator.sh
+./bash_scripts/generator.sh
 ```
 ```
 Usage: generate.py [OPTIONS]
@@ -91,9 +163,9 @@ Options:
   --help                          Show this message and exit.
 ```
 
-`find_best_fid.sh` can be used to determine which StyleGAN2-ADA weights were associated with the lowest FID score.
+`find_best_fid.sh` given the `--fname` argument can be used to determine which weights were associated with the lowest FID score.
 ```
-./scripts/find_best_fid.sh
+./bash_scripts/find_best_fid.sh
 ```
 ```
 usage: find_best_fid.py [-h] [-f FNAME]
@@ -104,12 +176,14 @@ Required Arguments:
                         the "metric-fid50k_full" JSON file.
 ```
 
-Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>1</sup> by providing the path to the first dataset `DSET1`, the path to the second dataset `DSET2`, either the InceptionV3 `InceptionV3_torch`<sup>2</sup> or `SwAV_torch`<sup>3</sup> backbones `BACKBONE`, and the txt file path to put the logs into `OUTPATH` to the `eval_fd.sh` script. The batch size `BATCH_SIZE` argument can also be updated if memory issues are encountered.
+Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>2</sup> by providing `--dset1`, `--dset2`, `--eval_backbone` (either `InceptionV3_torch`<sup>4</sup> or SwAV `SwAV_torch`<sup>5</sup>), and `--out_path` to the `eval_fd.sh` script. The batch size `--batch_size` argument can also be updated if memory issues are encountered.
 
-When evaluating a generative distribution, the first dataset consists of the real images, with the second consisting of the generated images (or vice versa). When determining a baseline, the first and second datasets come from a random split of the real images. In both cases, the folder name containing both image datasets must match (such as `class0`).
+When evaluating a generative distribution, the first dataset consists of real images (training images), and the second consists of the generated images (or vice versa). 
+When determining a baseline, the first and second datasets come from a random split of the real images. 
+In both cases, the folder name containing both image datasets must match (such as `class0`).
 
 ```
-./scripts/eval_fd.sh
+./bash_scripts/eval_fd.sh
 ```
 ```
 usage: evaluate.py [-h] [-metrics EVAL_METRICS [EVAL_METRICS ...]] [--post_resizer POST_RESIZER] [--eval_backbone EVAL_BACKBONE] [--dset1 DSET1]
@@ -145,14 +219,17 @@ optional arguments:
   --out_path OUT_PATH   output file to put metrics into
 ```
 
+The Fréchet Radiomics Distance (FRD)<sup>3</sup> can be calculated by providing the paths to the two datasets to `eval_frd.sh`.
+```
+./bash_scripts/eval_frd.sh
+```
+
 # Reconstruct images with StyleGAN2-ADA
 
-This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory. 
-
-Provide the path to the model weights `MODEL_PKL`, the path to the directory containing the original images `INPUT_DIR`, and the path to the directory to put the reconstructed images into `OUTPUT_DIR` to the `projector.sh` script.
+This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory. To reconstruct the images, provide `--network`, `--target`, and `--outdir` to the `projector.sh` script.
 
 ```
-./scripts/projector.sh
+./bash_scripts/projector.sh
 ```
 ```
 Usage: projector.py [OPTIONS]
@@ -201,6 +278,8 @@ Optional Arguments:
 ```
 
 # References
-1. Minguk Kang *et al.* StudioGAN: A taxonomy and benchmark of GANs for image synthesis. TPAMI, 45(12):15725-15742.
-2. Christian Szegedy *et al.* Going deeper with convolutions. In CVPR, IEEE, pages 1-9, 2015.
-3. Mathilde Caron *et al.* Unsupervised learning of visual features by contrasting cluster assignments. In H. Larochelle *et al.* (eds) Adv Neural Inf Process Syst, Curran Associates, Inc., 33:9912-9924, 2020.
+1. Tero Karras *et al.* Training generative adversarial networks with limited data. In NeurIPS 2020; Curran Associates, Inc; 33:12104-12114; 2020.
+2. Minguk Kang *et al.* StudioGAN: A taxonomy and benchmark of GANs for image synthesis. TPAMI, 45(12):15725-15742.
+3. Osuala *et al.* Towards learning contrast kinetics with multi-condition latent diffusion models. In MICCAI 2024; Springer, Cham; 15005:713-723; 2024.
+4. Christian Szegedy *et al.* Going deeper with convolutions. In CVPR 2015, IEEE, pp. 1-9, 2015.
+5. Mathilde Caron *et al.* Unsupervised learning of visual features by contrasting cluster assignments. In NeurIPS 2020; Curran Associates, Inc.; 33:9912-9924; 2020.
