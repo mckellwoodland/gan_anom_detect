@@ -219,10 +219,9 @@ optional arguments:
   --out_path OUT_PATH   output file to put metrics into
 ```
 
-The Fréchet Radiomics Distance (FRD)<sup>3<\sup> can be calculated by providing the paths to the two datasets to `eval_frd.sh`.
+The Fréchet Radiomics Distance (FRD)<sup>3</sup> can be calculated by providing the paths to the two datasets to `eval_frd.sh`.
 ```
 ./bash_scripts/eval_frd.sh
-```
 ```
 
 # Reconstruct images with StyleGAN2-ADA
