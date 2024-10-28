@@ -163,9 +163,9 @@ Options:
   --help                          Show this message and exit.
 ```
 
-`find_best_fid.sh` given a `--fname` argument can be used to determine which weights were associated with the lowest FID score.
+`find_best_fid.sh` given the `--fname` argument can be used to determine which weights were associated with the lowest FID score.
 ```
-./scripts/find_best_fid.sh
+./bash_scripts/find_best_fid.sh
 ```
 ```
 usage: find_best_fid.py [-h] [-f FNAME]
@@ -176,12 +176,14 @@ Required Arguments:
                         the "metric-fid50k_full" JSON file.
 ```
 
-Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>1</sup> by providing the path to the first dataset `DSET1`, the path to the second dataset `DSET2`, either the InceptionV3 `InceptionV3_torch`<sup>2</sup> or `SwAV_torch`<sup>3</sup> backbones `BACKBONE`, and the txt file path to put the logs into `OUTPATH` to the `eval_fd.sh` script. The batch size `BATCH_SIZE` argument can also be updated if memory issues are encountered.
+Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>2</sup> by providing `--dset1`, `--dset2`, `--eval_backbone` (either `InceptionV3_torch`<sup>4</sup> or SwAV `SwAV_torch`<sup>5</sup>), and `--out_path` to the `eval_fd.sh` script. The batch size `--batch_size` argument can also be updated if memory issues are encountered.
 
-When evaluating a generative distribution, the first dataset consists of the real images, with the second consisting of the generated images (or vice versa). When determining a baseline, the first and second datasets come from a random split of the real images. In both cases, the folder name containing both image datasets must match (such as `class0`).
+When evaluating a generative distribution, the first dataset consists of real images (training images), and the second consists of the generated images (or vice versa). 
+When determining a baseline, the first and second datasets come from a random split of the real images. 
+In both cases, the folder name containing both image datasets must match (such as `class0`).
 
 ```
-./scripts/eval_fd.sh
+./bash_scripts/eval_fd.sh
 ```
 ```
 usage: evaluate.py [-h] [-metrics EVAL_METRICS [EVAL_METRICS ...]] [--post_resizer POST_RESIZER] [--eval_backbone EVAL_BACKBONE] [--dset1 DSET1]
@@ -215,6 +217,12 @@ optional arguments:
                         rank of the current node
   --num_workers NUM_WORKERS
   --out_path OUT_PATH   output file to put metrics into
+```
+
+The Fréchet Radiomics Distance (FRD)<sup>3<\sup> can be calculated by providing the paths to the two datasets to `eval_frd.sh`.
+```
+./bash_scripts/eval_frd.sh
+```
 ```
 
 # Reconstruct images with StyleGAN2-ADA
