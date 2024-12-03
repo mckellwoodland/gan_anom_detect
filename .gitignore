@@ -3,5 +3,6 @@ figures/
 gan_training/
 images/
 models/
+notebooks/
 logs/
 .cache/
