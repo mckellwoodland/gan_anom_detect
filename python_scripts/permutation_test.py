@@ -49,5 +49,5 @@ def sim_pow(pop1, pop2, n, alpha=0.05, num_sim=int(1e3), num_itrs=int(1e3)):
 if __name__=="__main__":
     pop1 = list(pd.read_csv(args.csv1)[args.col_name1])
     pop2 = list(pd.read_csv(args.csv2)[args.col_name2])
-    #print("Power of calculation:", sim_pow(pop1, pop2, len(pop1)))
+    print("Power of calculation:", sim_pow(pop1, pop2, len(pop1)))
     print("Permutation test p-value:", perm_test(pop1,pop2))
