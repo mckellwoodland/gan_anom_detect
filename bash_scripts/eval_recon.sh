@@ -9,6 +9,7 @@ OUT_PATH="/workspace/"
 DIST="MSE"
 REG="full"
 PSIZE="32"
+PPATH="/workspace"
 
 # Run script.
 docker run -it --rm -v $(pwd):/workspace gan_anom_detect python /workspace/python_scripts/eval_recon.py \
@@ -17,4 +18,5 @@ docker run -it --rm -v $(pwd):/workspace gan_anom_detect python /workspace/pytho
 											--out_path $OUT_PATH \
 											--distance $DIST \
 											--region $REG \
-											--patch_size $PSIZE
+											--patch_size $PSIZE \
+											--patch_path $PPATH

@@ -29,8 +29,11 @@ required.add_argument('-r','--recon_dir',type=str,help='Path to the directory co
 optional = parser.add_argument_group('Optional Arguments')
 optional.add_argument('-d','--distance',type=str,default='MSE',help='One of [MSE, WD] for mean-squared error and Wasserstein distance.\
                             Defaults to MSE.')
-optional.add_argument('-p','--patch_size',type=int,default=32,help='Size of the patches when the region argument is "patch".\
+optional.add_argument('-ps','--patch_size',type=int,default=32,help='Size of the patches when the region argument is "patch".\
                                                                     Default: 32.')
+optional.add_argument('-pp','--patch_path',type=str,default=None,help='Folder to save the highest-scoring patches and their reconstructions to.\
+                                                                       Default to None. \
+                                                                       If None, no patches will be saved.')
 optional.add_argument('-reg','--region',type=str,default='full',help='The region of the image that the reconstruction metric should be calculated on. \
                                                                     Options: ["full","body","patch"].\
                                                                     Default: "full".')
@@ -92,7 +95,7 @@ if __name__=="__main__":
             dists['dist'].append(dist)
         else:
             max_metric, r, c = 0, 0, 0
-            outfile = os.path.join('images/patches/',f'{args.distance}{args.patch_size}',f'{args.orig_dir.split("/")[-2]}',fname)
+            outfile = os.path.join(f'{args.patch_path}',fname)
             if not os.path.exists(outfile):
                 for row in range(0, orig.shape[0]-args.patch_size):
                     for col in range(0, orig.shape[0]-args.patch_size):
@@ -112,7 +115,9 @@ if __name__=="__main__":
                 orig_recon = np.zeros((args.patch_size,args.patch_size*2))
                 orig_recon[:,:args.patch_size] = orig[r:r+args.patch_size,c:c+args.patch_size]
                 orig_recon[:,args.patch_size:] = recon[r:r+args.patch_size,c:c+args.patch_size]
-                imageio.imwrite(outfile,orig_recon.astype(np.uint8))
+                if args.patch_path:
+                    imageio.imwrite(outfile,orig_recon.astype(np.uint8))
+                    
     # Write out distances to CSV.
     dist_df = pd.DataFrame(dists)
     dist_df.to_csv(args.out_path, index=False)
