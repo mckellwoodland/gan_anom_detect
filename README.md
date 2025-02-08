@@ -293,6 +293,10 @@ Optional Arguments:
                         One integer representing the dimensionality of the patch to be evaluated. Defaults to 32.
 ```
 
+# Acknowledgments
+
+Research reported in this publication was supported in part by resources of the Image Guided Cancer Therapy Research Program at The University of Texas MD Anderson Cancer Center; by the National Institutes of Health/National Cancer Institute under award numbers P30CA016672, R01CA235564, and R01CA221971; by the Diagnostic Imaging – Summer Training and Experiences Partnership (DI-STEP); by the Tumor Measurement Initiative through the MD Anderson Strategic Initiative Development Program (STRIDE); by the Helen Black Image Guided Fund; and by a generous gift from the Apache Corporation. 
+
 # References
 1. Tero Karras *et al.* Training generative adversarial networks with limited data. In NeurIPS 2020; Curran Associates, Inc; 33:12104-12114; 2020.
 2. Minguk Kang *et al.* StudioGAN: A taxonomy and benchmark of GANs for image synthesis. TPAMI, 45(12):15725-15742.
