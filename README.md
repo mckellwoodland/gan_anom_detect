@@ -1,5 +1,5 @@
 # gan_anom_detect
-Official Repository for the paper "Generative Modeling for Anomaly Detection in Radiological Applications"
+Official Repository for the paper "Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation".
 
 # Dependencies
 
