@@ -1,5 +1,8 @@
 # Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation - Official Repository
 
+<p><img src="https://github.com/mckellwoodland/gan_anom_detect/blob/main/github_figures/graphical_abstract.png"
+</p>
+  
 **Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation**
 
 M. Woodland, M. Al Taie, C. O'Connor, O. Lebimoyo, J.P. Yung, P.E. Kinahan, C.D. Fuller, B.C. Odisio, A.B. Patel, & K.K. Brock
