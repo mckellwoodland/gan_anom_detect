@@ -1,5 +1,18 @@
-# gan_anom_detect
-Official Repository for the paper "Generative Modeling for Anomaly Detection in Radiological Applications"
+# Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation - Official Repository
+
+**Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation**
+
+M. Woodland, M. Al Taie, C. O'Connor, O. Lebimoyo, J.P. Yung, P.E. Kinahan, C.D. Fuller, B.C. Odisio, A.B. Patel, & K.K. Brock
+
+Abstract:
+
+*Purpose: To leverage generative modeling-based anomaly detection in two radiological applications, namely, providing interpretability for model failure prediction and enabling scalable data curation for large repositories.*
+
+*Materials and Methods: This retrospective study utilized 3,306 CT scans for failure prediction, divided patient-wise into training, baseline test, and anomaly (attributes that cause liver segmentation failures—e.g., needles, ascites) test datasets. For data curation, 112,120 ChestX-ray14 radiographs were used for training, and 2,307 radiographs from The Medical Imaging and Data Resource Center for testing, categorized as baseline or anomalous based on attribute alignment with ChestX-ray14. StyleGAN2 networks modeled the training distributions. Test images were reconstructed with backpropagation and scored using mean squared error (MSE) and Wasserstein distance (WD). Scores should be large for anomalous images since StyleGAN2 cannot model unseen attributes. Area under the receiver operating characteristic curve (AUROC) assessed anomaly detection, i.e., differentiating the baseline and anomaly datasets. The proportion of highest-scoring patches containing needles or ascites assessed anomaly localization (interpretability). Permutation tests determined statistical significance. The code and ChestX-ray14 weights are available at .*
+
+*Results:  StyleGAN2 did not reconstruct anomalous attributes (e.g., needles, ascites), enabling the unsupervised detection of attributes that cause model failure or deviate from ChestX-ray14—mean (± standard deviation) AUROCs of 0.82 (±0.16) and 0.82 (±0.11), respectively. 71% (±3%) of the needles and ascites were localized. WD outperformed MSE on CT (p<.001), while MSE outperformed WD on radiography (p<.001).*
+
+*Conclusion: Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large repository data curation.*
 
 # Dependencies
 
