@@ -1,7 +1,1 @@
-images/
-figures/
-gan_training/
-models/
-PyTorch-StudioGAN/
-scripts/
-stylegan2-ada-pytorch/
+# Add your own folders and files for Docker to know during build below.
