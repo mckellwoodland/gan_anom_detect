@@ -1,5 +1,8 @@
 # Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation - Official Repository
 
+<p><img src="https://github.com/mckellwoodland/gan_anom_detect/blob/main/github_figures/graphical_abstract.png"
+</p>
+  
 **Generative Modeling for Anomaly Detection in Radiological Imaging: Case Studies in Model Failure Detection Interpretability and Large-Scale Data Curation**
 
 M. Woodland, M. Al Taie, C. O'Connor, O. Lebimoyo, J.P. Yung, P.E. Kinahan, C.D. Fuller, B.C. Odisio, A.B. Patel, & K.K. Brock
@@ -289,6 +292,10 @@ Optional Arguments:
   -s PATCH_SIZE, --patch_size PATCH_SIZE
                         One integer representing the dimensionality of the patch to be evaluated. Defaults to 32.
 ```
+
+# Acknowledgments
+
+Research reported in this publication was supported in part by resources of the Image Guided Cancer Therapy Research Program at The University of Texas MD Anderson Cancer Center; by the National Institutes of Health/National Cancer Institute under award numbers P30CA016672, R01CA235564, and R01CA221971; by the Diagnostic Imaging – Summer Training and Experiences Partnership (DI-STEP); by the Tumor Measurement Initiative through the MD Anderson Strategic Initiative Development Program (STRIDE); by the Helen Black Image Guided Fund; and by a generous gift from the Apache Corporation. 
 
 # References
 1. Tero Karras *et al.* Training generative adversarial networks with limited data. In NeurIPS 2020; Curran Associates, Inc; 33:12104-12114; 2020.
