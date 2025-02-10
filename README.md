@@ -254,7 +254,7 @@ optional arguments:
   --out_path OUT_PATH   output file to put metrics into
 ```
 
-The Fréchet Radiomics Distance (FRD)<sup>4</sup> can be calculated by providing the paths to the two datasets to `eval_frd.sh`.
+The Fréchet Radiomics Distance (FRD)<sup>4</sup> can be calculated by providing the paths to the two directories containing the datasets to be evaluated to `eval_frd.sh`.
 ```
 ./bash_scripts/eval_frd.sh
 ```
@@ -289,28 +289,35 @@ Options:
 
 # Evaluate reconstructions
 
-This code evaluates reconstructions patch-wise. Corresponding original and reconstructed images must have the same name. Code is built for 2-dimensional grayscale PNG images.
+```
+./scripts/eval_recon.sh
+```
 
-Provide the paths to the directories containing the original `ORIG_DIR` and reconstructed images `RECON_DIR` to the `eval_recon_patch.sh` script. The distance function `DISTANCE` and patch size `PATCH_SIZE` can also be changed from their default values of `mean-squared error` and `32`.
-```
-./scripts/eval_recon_patch.sh
-```
-```
-usage: eval_recon_patch.py [-h] [-o ORIG_DIR] [-r RECON_DIR] [-d DISTANCE] [-s PATCH_SIZE]
+# Evaluate Anomaly Detection
 
-Required Arguments:
-  -o ORIG_DIR, --orig_dir ORIG_DIR
-                        Path to the directory containing the original images.
-  -r RECON_DIR, --recon_dir RECON_DIR
-                        Path to the directory containing the reconstructed images.
-
-Optional Arguments:
-  -d DISTANCE, --distance DISTANCE
-                        One of [MSE, WD, SS] for mean-squared error, Wasserstein distance, or Structural Similarity.
-                        Defaults to MSE.
-  -s PATCH_SIZE, --patch_size PATCH_SIZE
-                        One integer representing the dimensionality of the patch to be evaluated. Defaults to 32.
 ```
+./bash_scripts/eval_ad.sh
+```
+
+# Statistical Testing
+
+```
+./bash_scripts/permutation_test.sh
+```
+
+# Resource Availability
+
+## Data
+
+```
+add_noise.sh
+```
+
+```
+split_dataset.sh
+```
+
+## Model Weights
 
 # Acknowledgments
 
