@@ -10,6 +10,7 @@ OUTPATH="/workspace/"
 BATCH_SIZE="64"
 
 # Run script.
+# studiogan can be changed to alex4727/experiment:pytorch113_cuda116 for different CUDA compatibility.
 docker run -it --rm -v $(pwd):/workspace studiogan python /workspace/PyTorch-StudioGAN/src/evaluate.py \
                                                                                 -metrics fid \
                                                                                 --dset1 $DSET1 \
