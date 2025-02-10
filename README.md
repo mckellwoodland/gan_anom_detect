@@ -192,7 +192,7 @@ Required Arguments:
                         the "metric-fid50k_full" JSON file.
 ```
 
-Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>2</sup> by providing `--dset1`, `--dset2`, `--eval_backbone` (either `InceptionV3_torch`<sup>4</sup> or SwAV `SwAV_torch`<sup>5</sup>), and `--out_path` to the `eval_fd.sh` script. The batch size `--batch_size` argument can also be updated if memory issues are encountered.
+Evaluate FID and Fréchet SwAV Distance (FSD) with the StudioGAN<sup>2</sup> by providing `--dset1`, `--dset2`, `--eval_backbone` (either `InceptionV3_torch`<sup>4</sup> or `SwAV_torch`<sup>5</sup>), and `--out_path` to the `eval_fd.sh` script. The batch size `--batch_size` argument can also be updated if memory issues are encountered.
 
 When evaluating a generative distribution, the first dataset consists of real images (training images), and the second consists of the generated images (or vice versa). 
 When determining a baseline, the first and second datasets come from a random split of the real images. 
