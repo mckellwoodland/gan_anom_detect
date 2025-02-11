@@ -19,8 +19,10 @@ required.add_argument('-i','--in_dir',type=str,required=True,help='Path to the d
 required.add_argument('-o','--out_dir',type=str,required=True,help='Path to the directory to put the windowed images into.')
 
 optional = parser.add_argument_group('Optional Arguments')
-optional.add_argument('-w','--window_width',type=float,default=350.,help='Window width.')
-optional.add_argument('-l','--window_level',type=float,default=50.,help='Window level.')
+optional.add_argument('-w','--window_width',type=float,default=350.,help='Window width. \
+                                                                          Defaults to 350.')
+optional.add_argument('-l','--window_level',type=float,default=50.,help='Window level. \
+                                                                         Defaults to 50.')
 
 args = parser.parse_args()
 
