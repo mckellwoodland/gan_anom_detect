@@ -14,8 +14,8 @@ parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 
 required = parser.add_argument_group('Required Arguments')
-required.add_argument('-i','--input',type=str,required=True,help='Path to directory containing images to be manipulated.')
-required.add_argument('-o','--output',type=str,required=True,help='Path to directory to put the manipulated images into.')
+required.add_argument('-i','--in_dir',type=str,required=True,help='Path to directory containing images to be manipulated.')
+required.add_argument('-o','--out_dir',type=str,required=True,help='Path to directory to put the manipulated images into.')
 
 optional = parser.add_argument_group('Optional Arguments')
 optional.add_argument('-k','--kernel_size',type=str,default="(5,5)",help='Size of Gaussian kernel (blur).\
@@ -61,9 +61,9 @@ def add_gaussian_noise(img,mean,var):
 
 # Main code.
 if __name__=="__main__":
-    for img_name in tqdm.tqdm(os.listdir(args.input)):
+    for img_name in tqdm.tqdm(os.listdir(args.in_dir)):
         # Read in image.
-        img_pth = os.path.join(args.input,img_name)
+        img_pth = os.path.join(args.in_dir,img_name)
         img = Image.open(img_pth)
         # Convert to grayscale.
         img = img.convert('L')
@@ -80,5 +80,5 @@ if __name__=="__main__":
         img_m = (img_m * 255).astype(np.uint8)
         img_m = Image.fromarray(img_m)
         # Write manipulated image out to new location.
-        out_pth = os.path.join(args.output,img_name)
+        out_pth = os.path.join(args.out_dir,img_name)
         img_m.save(out_pth)

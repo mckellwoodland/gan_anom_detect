@@ -4,7 +4,7 @@
 IN="/workspace/"
 OUT="/workspace/"
 
-# Default arguments.
+# Optional arguments.
 KERNEL_SIZE="(11,11)"
 MEAN="0."
 SIGMA="0."
