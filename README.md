@@ -331,7 +331,7 @@ Distances must be calculated on each test directory, resulting in a CSV file of 
 
 # Evaluate Anomaly Detection
 
-Areas under the receiver operating characteristic curve (AUROC) can be calculated by providing the paths to the CSV files containing the distances for the baseline `--baseline` and anomaly `--anomaly` test datasets to `eval_ad.sh`, along with a path specifying where to put the CSV with the calculated AUROCs.
+Areas under the receiver operating characteristic curve (AUROCs) can be calculated by providing the paths to the CSV files containing the distances for the baseline `--baseline` and anomaly `--anomaly` test datasets (i.e., the outputs of the previous section) to `eval_ad.sh`, along with a path specifying where to put the CSV with the calculated AUROCs.
 By default, bootstrapping with 50 samples will be performed.
 The number of bootstrap samples can be changed with `--num_samp`.
 The final CSV file will contain the AUROCs for all bootstraps.
@@ -358,8 +358,29 @@ Optional Arguments:
 
 # Statistical Testing
 
+Permutation tests can be performed with `permutation_test.sh` by providing paths to the CSV files with bootstrapped AUROCs to be compared `--csv1` and `--csv1`.
+This is a one-sided permutation test that evaluates whether the mean of the first population is larger than the mean of the second.
+The simulated power of each calculation will be printed, along with the p-value of the executed test.
+By default, 100,000 permutations will be performed for each test.
+For the simulated power, the default significance level is $$\alpha=.05$$ and the default number of simulations and permutations is 1,000.
+
 ```
 ./bash_scripts/permutation_test.sh
+```
+```
+usage: permutation_test.py [-h] -c1 CSV1 -c2 CSV2 [-n1 COL_NAME1] [-n2 COL_NAME2]
+
+Required Arguments:
+  -c1 CSV1, --csv1 CSV1
+                        Path to CSV file containing the first population.
+  -c2 CSV2, --csv2 CSV2
+                        Path to CSV file containing the second population.
+
+Optional Arguments:
+  -n1 COL_NAME1, --col_name1 COL_NAME1
+                        Name of column containing the first population. Defaults to AUROC.
+  -n2 COL_NAME2, --col_name2 COL_NAME2
+                        Name of column containing the second population. Defaults to AUROC.
 ```
 
 # Resource Availability
