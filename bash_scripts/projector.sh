@@ -7,7 +7,7 @@ OUT_DIR="/workspace/"
 
 # Optional arguments.
 SAVE_VIDEO="False"
-MODE="RGB"
+MODE="L"
 
 # Run script.
 docker run --rm -v $(pwd):/workspace sg2ada python /workspace/stylegan2-ada-pytorch/projector.py \
