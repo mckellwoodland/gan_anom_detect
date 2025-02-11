@@ -387,6 +387,32 @@ Optional Arguments:
 
 ## Data
 
+### Abdominal Computed Tomography
+
+### Chest Radiograph
+
+The ChestX-ray14<sup>9</sup> dataset is downloadable from [Box](https://nihcc.app.box.com/v/ChestXray-NIHCC).
+Images can be rescaled to 512x512 with `rescale_images.sh` by providing the paths to the directory containing the original images `--in_dir` and the directory to put the resized images into `--out_dir`.
+
+```
+rescale_images.sh
+```
+```
+usage: rescale_images.py [-h] -i IN_DIR -o OUT_DIR [-r RESOLUTION]
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to the directory containing images to be resized.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to the directory to put resized images into.
+
+Optional Arguments:
+  -r RESOLUTION, --resolution RESOLUTION
+                        Desired output resolution. Defaults to 512.
+```
+
+### Fréchet Distance Baselines
+
 ```
 add_noise.sh
 ```
@@ -425,3 +451,4 @@ If you have found our work useful, we would appreciate a citation to our extende
 6. Stanislav Morozov *et al.* On self-supervised image representations for GAN evaluation. In ICLR 2021; 2021. [OpenReview](https://openreview.net/forum?id=NeRdBeTionN)
 7. Christian Szegedy *et al.* Going deeper with convolutions. In CVPR 2015, IEEE, pp. 1-9, 2015.[Proceedings](https://openaccess.thecvf.com/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html).
 8. Mathilde Caron *et al.* Unsupervised learning of visual features by contrasting cluster assignments. In NeurIPS 2020; Curran Associates, Inc.; 33:9912-9924; 2020. [Proceedings](https://proceedings.neurips.cc/paper/2020/hash/70feb62b69f16e0238f741fab228fec2-Abstract.html).
+9. Xiaosong Wang *et al.* ChestX-ray8: Hospital-scale chest X-ray database and benchmarks on weakly-supervised classification and localization of common thorax diseases. In CVPR 2017; IEEE; 3462-3471; 2017. [Proceedings](https://openaccess.thecvf.com/content_cvpr_2017/html/Wang_ChestX-ray8_Hospital-Scale_Chest_CVPR_2017_paper.html).
