@@ -15,12 +15,12 @@ parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 
 required = parser.add_argument_group('Required Arguments')
-required.add_argument('-a','--anomaly',type=str,help='Path to csv file containing the distances for the anomalous dataset.')
-required.add_argument('-b','--baseline',type=str,help='Path to csv file containing the distances for the baseline data.')
-required.add_argument('-o','--out_path',type=str,help='Path to csv file to write AUROCS to')
+required.add_argument('-a','--anomaly',type=str,required=True,help='Path to csv file containing the distances for the anomalous dataset.')
+required.add_argument('-b','--baseline',type=str,required=True,help='Path to csv file containing the distances for the baseline data.')
+required.add_argument('-o','--out_path',type=str,required=True,help='Path to csv file to write AUROCS to.')
 
 optional = parser.add_argument_group('Optional Arguments')
-optional.add_argument('-n','--num_samp',type=int,help='The number of bootstrap samples to use')
+optional.add_argument('-n','--num_samp',type=int,default=50,help='The number of bootstrap samples to use.')
 
 args = parser.parse_args()
 
