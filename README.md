@@ -391,10 +391,25 @@ Optional Arguments:
 
 The data from The University of Texas MD Anderson Cancer Center may be made available upon request, in compliance with institutional review board requirements.
 
-Data can be windowed with `window_level.sh` by providing the directory containing the images to be windowed in NIfTI format and the output directory.
+Data can be windowed with `window_level.sh` by providing the directory containing the images to be windowed in NIfTI format `--in_dir` and the output directory `--out_dir`.
+
 ```
 ./bash_scripts/window_level.sh
 ```
+```
+usage: window_level.py [-h] -i IN_DIR -o OUT_DIR [-w WINDOW_WIDTH] [-l WINDOW_LEVEL]
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to the directory containing images to be windowed. Images must be in NIfTI format.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to the directory to put the windowed images into.
+
+Optional Arguments:
+  -w WINDOW_WIDTH, --window_width WINDOW_WIDTH
+                        Window width.
+  -l WINDOW_LEVEL, --window_level WINDOW_LEVEL
+                        Window level.
 ```
 
 ### Chest Radiograph
