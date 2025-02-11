@@ -326,10 +326,34 @@ Optional Arguments:
                         The region of the image that the reconstruction metric should be calculated on. Options: ["full","body","patch"]. Default: "full".
 ```
 
+The baseline test dataset and each anomaly test dataset must be placed in separate directories prior to the distance calculations.
+Distances must be calculated on each test directory, resulting in a CSV file of distances for each test dataset.
+
 # Evaluate Anomaly Detection
+
+Areas under the receiver operating characteristic curve (AUROC) can be calculated by providing the paths to the CSV files containing the distances for the baseline `--baseline` and anomaly `--anomaly` test datasets to `eval_ad.sh`, along with a path specifying where to put the CSV with the calculated AUROCs.
+By default, bootstrapping with 50 samples will be performed.
+The number of bootstrap samples can be changed with `--num_samp`.
+The final CSV file will contain the AUROCs for all bootstraps.
+The script prints out the mean and standard deviation of these AUROCs.
 
 ```
 ./bash_scripts/eval_ad.sh
+```
+```
+usage: eval_ad.py [-h] -a ANOMALY -b BASELINE -o OUT_PATH [-n NUM_SAMP]
+
+Required Arguments:
+  -a ANOMALY, --anomaly ANOMALY
+                        Path to csv file containing the distances for the anomalous dataset.
+  -b BASELINE, --baseline BASELINE
+                        Path to csv file containing the distances for the baseline data.
+  -o OUT_PATH, --out_path OUT_PATH
+                        Path to csv file to write AUROCS to.
+
+Optional Arguments:
+  -n NUM_SAMP, --num_samp NUM_SAMP
+                        The number of bootstrap samples to use.
 ```
 
 # Statistical Testing
