@@ -9,7 +9,7 @@ OUT_PATH="/workspace/"
 DIST="MSE"
 REG="full"
 PSIZE="32"
-PPATH="/workspace"
+PPATH="None"
 
 # Run script.
 docker run -it --rm -v $(pwd):/workspace gan_anom_detect python /workspace/python_scripts/eval_recon.py \
