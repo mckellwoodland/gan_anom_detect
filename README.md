@@ -66,7 +66,7 @@ Lastly, the following Docker container is compatible with the `frd-score` Python
 docker build --tag frd:latest frd/.
 ```
 
-# Train a StyleGAN2-ADA model.
+# Train a StyleGAN2-ADA Model
 
 Train a StyleGAN2-ADA<sup>1</sup> model with the StyleGAN2-ADA repository (forked) by providing the `--outdir` and `--data` arguments to the `train.sh` script.
 The provided `Optional Arguments` in the script were the hyperparameters used to train models in our study.
@@ -216,7 +216,6 @@ If you have problems with the compatibility of the PyTorch version with your CUD
 When evaluating a generative distribution, the first dataset consists of real images (training images), and the second consists of the generated images (or vice versa). 
 When determining a baseline, the first and second datasets come from a random split of the real images.
 
-
 ```
 ./bash_scripts/eval_fd.sh
 ```
@@ -259,7 +258,7 @@ The Fréchet Radiomics Distance (FRD)<sup>4</sup> can be calculated by providing
 ./bash_scripts/eval_frd.sh
 ```
 
-# Reconstruct images with StyleGAN2-ADA
+# Reconstruct Images with StyleGAN2-ADA
 
 This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. 
 You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory and saving images in grayscale. 
@@ -295,7 +294,7 @@ Options:
   --help                Show this message and exit.
 ```
 
-# Evaluate reconstructions
+# Evaluate Reconstructions
 
 ```
 ./scripts/eval_recon.sh
@@ -330,6 +329,21 @@ split_dataset.sh
 # Acknowledgments
 
 Research reported in this publication was supported in part by resources of the Image Guided Cancer Therapy Research Program at The University of Texas MD Anderson Cancer Center; by the National Institutes of Health/National Cancer Institute under award numbers P30CA016672, R01CA235564, and R01CA221971; by the Diagnostic Imaging – Summer Training and Experiences Partnership (DI-STEP); by the Tumor Measurement Initiative through the MD Anderson Strategic Initiative Development Program (STRIDE); by the Helen Black Image Guided Fund; and by a generous gift from the Apache Corporation. 
+
+# Citation
+
+If you have found our work useful, we would appreciate a citation to our extended abstract.
+```
+@misc{woodland2023stylegan2basedoutofdistributiondetectionmedical,
+      title={StyleGAN2-based Out-of-Distribution Detection for Medical Imaging}, 
+      author={McKell Woodland and John Wood and Caleb O'Connor and Ankit B. Patel and Kristy K. Brock},
+      year={2023},
+      eprint={2307.10193},
+      archivePrefix={arXiv},
+      primaryClass={eess.IV},
+      url={https://arxiv.org/abs/2307.10193}, 
+}
+```
 
 # References
 1. McKell Woodland *et al.* StyleGAN2-based out-of-distribution detection for medical imaging. arXiv:2307.10193. [Accepted abstract](https://arxiv.org/abs/2307.10193).
