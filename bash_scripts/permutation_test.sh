@@ -1,10 +1,12 @@
 #!/bin/bash
 
 # Required arguments.
-CSV1=""
-CSV2=""
-NAME1=""
-NAME2=""
+CSV1="/workspace/"
+CSV2="/workspace/"
+
+# Optional arguments.
+NAME1="AUROC"
+NAME2="AUROC"
 
 # Run script.
 docker run --rm -v $(pwd):/workspace gan_anom_detect python /workspace/python_scripts/permutation_test.py \
