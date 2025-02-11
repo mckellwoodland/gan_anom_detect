@@ -10,10 +10,7 @@ import pandas as pd
 parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 required = parser.add_argument_group('Required Arguments')
-required.add_argument('-f',
-                      '--fname',
-                      type=str,
-                      help='Path to the StyleGAN2-ADA output JSON file with metric information, i.e. the "metric-fid50k_full" JSON file.')
+required.add_argument('-f','--fname',type=str,required=True,help='Path to the StyleGAN2-ADA output JSON file with metric information, i.e. the "metric-fid50k_full" JSON file.')
 args = parser.parse_args()
 
 # Main code.

@@ -14,8 +14,8 @@ parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 
 required = parser.add_argument_group('Required Arguments')
-required.add_argument('-i','--input',type=str,help='Path to directory containing images to be manipulated.')
-required.add_argument('-o','--output',type=str,help='Path to directory to put the manipulated images into.')
+required.add_argument('-i','--input',type=str,required=True,help='Path to directory containing images to be manipulated.')
+required.add_argument('-o','--output',type=str,required=True,help='Path to directory to put the manipulated images into.')
 
 optional = parser.add_argument_group('Optional Arguments')
 optional.add_argument('-k','--kernel_size',type=str,default="(5,5)",help='Size of Gaussian kernel (blur).\

@@ -22,9 +22,9 @@ parser = argparse.ArgumentParser()
 parser._action_groups.pop()
 
 required = parser.add_argument_group('Required Arguments')
-required.add_argument('-o','--orig_dir',type=str,help='Path to the directory containing the original images.')
-required.add_argument('-op','--out_path',type=str,help='Path to csv file to write distances to.')
-required.add_argument('-r','--recon_dir',type=str,help='Path to the directory containing the reconstructed images.')
+required.add_argument('-o','--orig_dir',type=str,required=True,help='Path to the directory containing the original images.')
+required.add_argument('-op','--out_path',type=str,required=True,help='Path to the CSV file to write distances to.')
+required.add_argument('-r','--recon_dir',type=str,required=True,help='Path to the directory containing the reconstructed images.')
 
 optional = parser.add_argument_group('Optional Arguments')
 optional.add_argument('-d','--distance',type=str,default='MSE',help='One of [MSE, WD] for mean-squared error and Wasserstein distance.\
