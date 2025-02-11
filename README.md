@@ -296,8 +296,34 @@ Options:
 
 # Evaluate Reconstructions
 
+The distances between images and their reconstructions can be calculated by providing the `--orig_dir`, `--recon_dir`, and `--out_path` arguments to `eval_recon.sh`.
+`--distance` controls whether the mean-squared error or the Wasserstein distance is used.
+`--region` controls whether the distance is calculated within a full image, within the human body, or within a patch.
+If `patch` is specified, then `--patch_size` determines the patch size and `--patch_path` provides a path to a directory where the patch with the highest distance will be saved, along with its reconstruction, which is placed to the right of the original patch.
+
 ```
 ./scripts/eval_recon.sh
+```
+```
+usage: eval_recon.py [-h] [-o ORIG_DIR] [-op OUT_PATH] [-r RECON_DIR] [-d DISTANCE] [-ps PATCH_SIZE] [-pp PATCH_PATH] [-reg REGION]
+
+Required Arguments:
+  -o ORIG_DIR, --orig_dir ORIG_DIR
+                        Path to the directory containing the original images.
+  -op OUT_PATH, --out_path OUT_PATH
+                        Path to csv file to write distances to.
+  -r RECON_DIR, --recon_dir RECON_DIR
+                        Path to the directory containing the reconstructed images.
+
+Optional Arguments:
+  -d DISTANCE, --distance DISTANCE
+                        One of [MSE, WD] for mean-squared error and Wasserstein distance. Defaults to MSE.
+  -ps PATCH_SIZE, --patch_size PATCH_SIZE
+                        Size of the patches when the region argument is "patch". Default: 32.
+  -pp PATCH_PATH, --patch_path PATCH_PATH
+                        Folder to save the highest-scoring patches and their reconstructions to. Default to None. If None, no patches will be saved.
+  -reg REGION, --region REGION
+                        The region of the image that the reconstruction metric should be calculated on. Options: ["full","body","patch"]. Default: "full".
 ```
 
 # Evaluate Anomaly Detection
