@@ -4,6 +4,8 @@
 ANOM='/workspace/'
 BASE='/workspace/'
 OUT='/workspace/'
+
+# Optional arguments.
 NUM='50'
 
 # Run script.
