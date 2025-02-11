@@ -387,7 +387,15 @@ Optional Arguments:
 
 ## Data
 
-### Abdominal Computed Tomography
+### Computed Tomography
+
+The data from The University of Texas MD Anderson Cancer Center may be made available upon request, in compliance with institutional review board requirements.
+
+Data can be windowed with `window_level.sh` by providing the directory containing the images to be windowed in NIfTI format and the output directory.
+```
+./bash_scripts/window_level.sh
+```
+```
 
 ### Chest Radiograph
 
