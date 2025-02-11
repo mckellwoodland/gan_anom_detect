@@ -261,8 +261,10 @@ The Fréchet Radiomics Distance (FRD)<sup>4</sup> can be calculated by providing
 
 # Reconstruct images with StyleGAN2-ADA
 
-This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory. To reconstruct the images, provide `--network`, `--target`, and `--outdir` to the `projector.sh` script.
-
+This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. 
+You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory and saving images in grayscale. 
+To reconstruct the images, provide the `--network`, `--target`, and `--outdir` arguments to the `projector.sh` script.
+The `--mode` optional argument can be changed to save images in color (defaults to grayscale).
 ```
 ./bash_scripts/projector.sh
 ```
@@ -278,12 +280,18 @@ Usage: projector.py [OPTIONS]
 
 Options:
   --network TEXT        Network pickle filename  [required]
-  --target FILE         Target image file to project to  [required]
+  --target FILE         Directory with the target image file to project to
+                        [required]
+
   --num-steps INTEGER   Number of optimization steps  [default: 1000]
   --seed INTEGER        Random seed  [default: 303]
   --save-video BOOLEAN  Save an mp4 video of optimization progress  [default:
                         True]
+
   --outdir DIR          Where to save the output images  [required]
+  --mode TEXT           Whether to reconstruct color (RGB) or grayscale (L)
+                        images  [default: RGB]
+
   --help                Show this message and exit.
 ```
 
