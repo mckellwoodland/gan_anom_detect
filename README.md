@@ -418,6 +418,13 @@ For convenience, we have provided `dicom_2_nifti.sh` to convert DICOM files to N
 ./bash_scripts/dicom_2_nifti.sh
 ```
 ```
+usage: dicom_2_nifti.py [-h] -i IN_DIR -o OUT_DIR
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to the directory containing DICOMs to be converted.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to the directory to put the NIfTIs.
 ```
 
 ### Chest Radiograph
