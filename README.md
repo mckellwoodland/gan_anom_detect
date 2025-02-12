@@ -392,7 +392,7 @@ Optional Arguments:
 The data from The University of Texas MD Anderson Cancer Center may be made available upon request, in compliance with institutional review board requirements.
 
 Data can be windowed with `window_level.sh` by providing the directory containing the images to be windowed in NIfTI format `--in_dir` and the output directory `--out_dir`.
-
+Window width and level can be changed from the defaults of 350 and 50 with `--window_width` and `--window_level`.
 ```
 ./bash_scripts/window_level.sh
 ```
@@ -407,9 +407,17 @@ Required Arguments:
 
 Optional Arguments:
   -w WINDOW_WIDTH, --window_width WINDOW_WIDTH
-                        Window width.
+                        Window width. Defaults to 350.
   -l WINDOW_LEVEL, --window_level WINDOW_LEVEL
-                        Window level.
+                        Window level. Defaults to 50.
+```
+
+All images must be in NIfTI format before windowing.
+For convenience, we have provided `dicom_2_nifti.sh` to convert DICOM files to NIfTI.
+```
+./bash_scripts/dicom_2_nifti.sh
+```
+```
 ```
 
 ### Chest Radiograph
