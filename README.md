@@ -427,6 +427,31 @@ Required Arguments:
                         Path to the directory to put the NIfTIs.
 ```
 
+Three-dimensional images can be converted to two-dimensional axial slices by providing `--in_dir` and `--out_dir` to `slice.sh`.
+If `--mask_dir` is provided, only slices that contain the given structure will be saved.
+The masks must have the same filename as the original image.
+The mask filename must not contain a period.
+The slices containing the mask must be consecutive.
+
+```
+./bash_scripts/slice.sh
+```
+```
+usage: slice.py [-h] -i IN_DIR -o OUT_DIR [-m MASK_DIR]
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to the directory containing the 3D NIfTI images to be sliced.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to the directory to put the 2D NIfTI slices.
+
+Optional Arguments:
+  -m MASK_DIR, --mask_dir MASK_DIR
+                        Path to the directory containing masks. The masks must have the same filename as the original image. The mask filename must not
+                        contain a period. The slices containing the mask must be consecutive. All saved slices will contain the given structure. If None,
+                        all slices will be saved. Default is None.
+```
+
 ### Chest Radiograph
 
 The ChestX-ray14<sup>9</sup> dataset is downloadable from [Box](https://nihcc.app.box.com/v/ChestXray-NIHCC).
