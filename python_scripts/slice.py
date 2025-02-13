@@ -46,10 +46,10 @@ if __name__=="__main__":
         img_data = img.get_fdata()
 
         # Only keep the slices that pertain to the mask.
+        first_s, last_s = 0, img_data.shape[2]
         if args.mask_dir:
             mask = nib.load(os.path.join(args.mask_dir, filename))
             mask_data = mask.get_fdata()
-            first_s, last_s = 0, mask_data.shape[2]
             first = False
             for i in range(mask_data.shape[2]):
                 if np.sum(mask_data[:, :, i]) != 0.0 and first is False:
@@ -63,6 +63,6 @@ if __name__=="__main__":
         # Write out individual slices.
         for i in range(img_data.shape[2]):
             img_slice = img_data[:, :, i]
-            out_pth = os.path.join(args.out_dir, prefix + f"_{i}.nii.gz")
+            out_pth = os.path.join(args.out_dir, prefix + f"_{i+first_s}.nii.gz")
             out_img = nib.Nifti1Image(img_slice, img.affine, img.header)
             nib.save(out_img, out_pth)

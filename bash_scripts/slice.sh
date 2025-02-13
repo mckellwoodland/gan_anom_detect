@@ -11,4 +11,4 @@ MASK="/workspace/"
 docker run --rm -v $(pwd):/workspace gan_anom_detect python python_scripts/slice.py \
 										--in_dir=$IN \
 										--out_dir=$OUT \
-										--mask_dir=$MASK \
+										--mask_dir=$MASK 
