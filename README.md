@@ -432,7 +432,6 @@ If `--mask_dir` is provided, only slices that contain the given structure will b
 The masks must have the same filename as the original image.
 The mask filename must not contain a period.
 The slices containing the mask must be consecutive.
-
 ```
 ./bash_scripts/slice.sh
 ```
@@ -450,6 +449,21 @@ Optional Arguments:
                         Path to the directory containing masks. The masks must have the same filename as the original image. The mask filename must not
                         contain a period. The slices containing the mask must be consecutive. All saved slices will contain the given structure. If None,
                         all slices will be saved. Default is None.
+```
+
+NIfTI slices can be converted to PNG images with `png_conversion.sh`.
+
+```
+./bash_scripts/png_conversion.sh
+```
+```
+usage: png_conversion.py [-h] -i IN_DIR -o OUT_DIR
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to the directory containing NIfTI slices to be converted.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to the directory to put the PNG images.
 ```
 
 ### Chest Radiograph
