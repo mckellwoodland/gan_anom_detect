@@ -488,6 +488,10 @@ Optional Arguments:
                         Desired output resolution. Defaults to 512.
 ```
 
+All available chest radiographs were downloaded from the Medical Imaging and Data Resource Center (MIDRC) in November 2022.
+Specifically, under "Body Part Examined", "CHEST" and "PORT CHEST" were selected and "DX" and "CR" were selected under "Study Modality".
+The exact Case IDs, Study UIDs, and filenames associated with the 64,373 radiographs downloaded are available via request for replication purposes, in compliance with MIDRC policies.
+
 ### Fréchet Distance Baselines
 
 ```
