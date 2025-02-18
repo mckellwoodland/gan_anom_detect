@@ -472,7 +472,7 @@ The ChestX-ray14<sup>9</sup> dataset is downloadable from [Box](https://nihcc.ap
 Images can be rescaled to 512x512 with `rescale_images.sh` by providing the paths to the directory containing the original images `--in_dir` and the directory to put the resized images into `--out_dir`.
 
 ```
-rescale_images.sh
+./bash_scripts/rescale_images.sh
 ```
 ```
 usage: rescale_images.py [-h] -i IN_DIR -o OUT_DIR [-r RESOLUTION]
@@ -491,6 +491,24 @@ Optional Arguments:
 All available chest radiographs were downloaded from the Medical Imaging and Data Resource Center (MIDRC) in November 2022.
 Specifically, under "Body Part Examined", "CHEST" and "PORT CHEST" were selected and "DX" and "CR" were selected under "Study Modality".
 The exact Case IDs, Study UIDs, and filenames associated with the 64,373 radiographs downloaded are available via request for replication purposes, in compliance with MIDRC policies.
+
+The `preprocess_midrc` script can be used to perform the preprocessing: slice, resize to 512x512, rescale to [0, 255], convert to unsigned 8-bit integers, and write to PNG.
+The DICOMs within `--in_dir` should be organized first by the body part examined and then by the modality.
+
+```
+./bash_scripts/preprocess_midrc.sh
+```
+```
+usage: preprocess_midrc.py [-h] -i IN_DIR -o OUT_DIR
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to directory that contains the original DICOMs in subdirectories. The first subset of
+                        directories should be named after the body part examined. The second subset should be named
+                        after the modality.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to directory to put PNGs into.
+```
 
 ### Fréchet Distance Baselines
 
