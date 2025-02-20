@@ -22,7 +22,7 @@ optional.add_argument('-k','--kernel_size',type=str,default="(5,5)",help='Size o
                                                                           Defaults to (5,5).')
 optional.add_argument('-m','--mean',type=float,default=0.,help='Mean of Gaussian distribution (noise).\
                                                                 Defaults to 0.')
-optional.add_argument('-s','--sigma',type=float,default=0.,help='Standard deviation of kernel.\
+optional.add_argument('-s','--sigma',type=float,default=0.,help='Standard deviation of kernel (blur).\
                                                                  Defaults to 0.')
 optional.add_argument('-t','--type',type=str,default='n',help='Type of image manipulation: Gaussian noise (n) or blur (b).\
                                                                Defaults to n.')
