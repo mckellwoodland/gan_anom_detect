@@ -472,7 +472,7 @@ The ChestX-ray14<sup>9</sup> dataset is downloadable from [Box](https://nihcc.ap
 Images can be rescaled to 512x512 with `rescale_images.sh` by providing the paths to the directory containing the original images `--in_dir` and the directory to put the resized images into `--out_dir`.
 
 ```
-rescale_images.sh
+./bash_scripts/rescale_images.sh
 ```
 ```
 usage: rescale_images.py [-h] -i IN_DIR -o OUT_DIR [-r RESOLUTION]
@@ -488,18 +488,66 @@ Optional Arguments:
                         Desired output resolution. Defaults to 512.
 ```
 
-All available chest radiographs were downloaded from the Medical Imaging and Data Resource Center (MIDRC) in November 2022.
+All available chest radiographs were downloaded from the [Medical Imaging and Data Resource Center (MIDRC)](https://www.midrc.org/) in November 2022.
 Specifically, under "Body Part Examined", "CHEST" and "PORT CHEST" were selected and "DX" and "CR" were selected under "Study Modality".
 The exact Case IDs, Study UIDs, and filenames associated with the 64,373 radiographs downloaded are available via request for replication purposes, in compliance with MIDRC policies.
 
+The `preprocess_midrc` script can be used to perform the preprocessing: slice, resize to 512x512, rescale to [0, 255], convert to unsigned 8-bit integers, and write to PNG.
+The DICOMs within `--in_dir` should be organized first by the body part examined and then by the modality.
+
+```
+./bash_scripts/preprocess_midrc.sh
+```
+```
+usage: preprocess_midrc.py [-h] -i IN_DIR -o OUT_DIR
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to directory that contains the original DICOMs in subdirectories. The first subset of
+                        directories should be named after the body part examined. The second subset should be named
+                        after the modality.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to directory to put PNGs into.
+```
+
 ### Fréchet Distance Baselines
 
-```
-add_noise.sh
-```
+Gaussian noise and blur can be added to images with `add_noise.sh`.
 
 ```
-split_dataset.sh
+./bash_scripts/add_noise.sh
+```
+```
+usage: add_noise.py [-h] -i IN_DIR -o OUT_DIR [-k KERNEL_SIZE] [-m MEAN] [-s SIGMA] [-t TYPE] [-v VAR]
+
+Required Arguments:
+  -i IN_DIR, --in_dir IN_DIR
+                        Path to the directory containing images to be manipulated.
+  -o OUT_DIR, --out_dir OUT_DIR
+                        Path to the directory to put the manipulated images into.
+
+Optional Arguments:
+  -k KERNEL_SIZE, --kernel_size KERNEL_SIZE
+                        Size of Gaussian kernel (blur). Defaults to (5,5).
+  -m MEAN, --mean MEAN  Mean of Gaussian distribution (noise). Defaults to 0.
+  -s SIGMA, --sigma SIGMA
+                        Standard deviation of kernel (blur). Defaults to 0.
+  -t TYPE, --type TYPE  Type of image manipulation: Gaussian noise (n) or blur (b). Defaults to n.
+  -v VAR, --var VAR     Variance of Gaussian distribution (noise). Defaults to 0.01.
+```
+
+Datasets can be randomly split in half with `split_dataset.sh`.
+
+```
+./bash_scripts/split_dataset.sh
+```
+```
+usage: split_dataset.py [-h] --in_dir IN_DIR --out_dir1 OUT_DIR1 --out_dir2 OUT_DIR2
+
+Required Arguments:
+  --in_dir IN_DIR      Path to folder containing dataset to split.
+  --out_dir1 OUT_DIR1  Path to folder to put first half of the dataset into.
+  --out_dir2 OUT_DIR2  Path to folder to put second half of the dataset into.
 ```
 
 ## Model Weights
