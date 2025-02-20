@@ -554,7 +554,14 @@ Required Arguments:
 
 # Acknowledgments
 
-Research reported in this publication was supported in part by resources of the Image Guided Cancer Therapy Research Program at The University of Texas MD Anderson Cancer Center; by the National Institutes of Health/National Cancer Institute under award numbers P30CA016672, R01CA235564, and R01CA221971; by the Diagnostic Imaging – Summer Training and Experiences Partnership (DI-STEP); by the Tumor Measurement Initiative through the MD Anderson Strategic Initiative Development Program (STRIDE); by the Helen Black Image Guided Fund; and by a generous gift from the Apache Corporation. 
+Research reported in this publication was supported in part by resources of the Image Guided Cancer Therapy Research Program at The University of Texas MD Anderson Cancer Center; 
+by the National Institutes of Health/National Cancer Institute under award numbers P30CA016672, R01CA235564, and R01CA221971; 
+by the Diagnostic Imaging – Summer Training and Experiences Partnership (DI-STEP); 
+by the Tumor Measurement Initiative through the MD Anderson Strategic Initiative Development Program (STRIDE); 
+by the Helen Black Image Guided Fund; and by a generous gift from the Apache Corporation. 
+
+The imaging and associated clinical data downloaded from MIDRC (The Medical Imaging and Data Resource Center) and used for research in this publication were made possible by the National Institute of Biomedical Imaging and Bioengineering (NIBIB) of the National Institutes of Health under contract 75N92020D00021. 
+The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health.
 
 # Citation
 
