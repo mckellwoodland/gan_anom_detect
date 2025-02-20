@@ -550,7 +550,9 @@ Required Arguments:
   --out_dir2 OUT_DIR2  Path to folder to put second half of the dataset into.
 ```
 
-## Model Weights
+## Models
+
+The ChestX-ray14 StyleGAN2-ADA weights that were used for anomaly detection within radiographs from MIDRC have been published on [Zenodo](https://zenodo.org/records/14901472).
 
 # Acknowledgments
 
