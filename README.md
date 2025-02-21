@@ -31,6 +31,20 @@ This work has been submitted to *Radiology: Artificial Intelligence* for possibl
 It is an expansion of the extended abstract titled *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>1</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
 It was extended with the anomaly localization evaluation, the data curation application, and the generative modeling evaluation.
 
+# MD Anderson Information Only
+
+This project is mounted at `/Morfeus/McKell/public_githubs/gan_anom_detect`.
+The `figures` subdirectory contains the `.pptx` and `png` files for each figure in the paper.
+The `gan_training` subdirectory contains the output files for the ChestX-ray14 and liver StyleGAN2 model training.
+
+The `images` subdirectory contains the PNGS.
+`generated` contains 50,000 generated images, repeated five times with different random seeds, per StyleGAN2 model.
+`original` contains the PNGs used for training and testing.
+`patches` contains the highest scoring patches with their associated reconstructions on their right for each reconstruction scoring function and patch size, repeated with five random seeds.
+`reconstructed` contains the images that were reconstructed via backpropagation on a trained StyleGAN2 model.
+Only Needles and Ascites were reconstructed five times in grayscale.
+`splits` contains the training dataset splits that allowed for the calculation of the baseline Fréchet distances.
+
 # Dependencies
 
 This code was built with Python 3 with package versions listed in the `requirements.txt` file.
