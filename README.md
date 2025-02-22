@@ -45,6 +45,13 @@ The `images` subdirectory contains the PNGS.
 Only Needles and Ascites were reconstructed five times in grayscale.
 `splits` contains the training dataset splits that allowed for the calculation of the baseline Fréchet distances.
 
+The `logs` subdirectory contains saved results and other summaries.
+`aucs` contains the areas under the receiver operating characteristic curves for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`.
+`dists` contains the reconstruction scoring metrics for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`.
+The Needles and Ascites datasets also have `seed{seed}` in the filenames associated with the images used for Table 4 (anomaly localization).
+`patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`.
+The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
+
 # Dependencies
 
 This code was built with Python 3 with package versions listed in the `requirements.txt` file.
