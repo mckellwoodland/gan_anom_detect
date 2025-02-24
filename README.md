@@ -34,23 +34,20 @@ It was extended with the anomaly localization evaluation, the data curation appl
 # MD Anderson Information Only
 
 This project is mounted at `/Morfeus/McKell/public_githubs/gan_anom_detect`.
-The `figures` subdirectory contains the `.pptx` and `png` files for each figure in the paper.
-The `gan_training` subdirectory contains the output files for the ChestX-ray14 and liver StyleGAN2 model training.
-
-The `images` subdirectory contains the PNGS.
-`generated` contains 50,000 generated images, repeated five times with different random seeds, per StyleGAN2 model.
-`original` contains the PNGs used for training and testing.
-`patches` contains the highest scoring patches with their associated reconstructions on their right for each reconstruction scoring function and patch size, repeated with five random seeds.
-`reconstructed` contains the images that were reconstructed via backpropagation on a trained StyleGAN2 model.
-Only Needles and Ascites were reconstructed five times in grayscale.
-`splits` contains the training dataset splits that allowed for the calculation of the baseline Fréchet distances.
-
-The `logs` subdirectory contains saved results and other summaries.
-`aucs` contains the areas under the receiver operating characteristic curves for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`.
-`dists` contains the reconstruction scoring metrics for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`.
-The Needles and Ascites datasets also have `seed{seed}` in the filenames associated with the images used for Table 4 (anomaly localization).
-`patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`.
-The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
+- The `figures` subdirectory contains the `.pptx` and `.png` files for each figure in the paper.
+- The `gan_training` subdirectory contains the output files for the ChestX-ray14 and liver StyleGAN2 model training.
+- The `images` subdirectory contains the PNGS.
+  - `generated` contains 50,000 generated images, repeated five times with different random seeds, per StyleGAN2 model.
+  - `original` contains the PNGs used for training and testing.
+  - `patches` contains the highest scoring patches with their associated reconstructions on their right for each reconstruction scoring function and patch size, repeated with five random seeds.
+  - `reconstructed` contains the images that were reconstructed via backpropagation on a trained StyleGAN2 model. Only Needles and Ascites were reconstructed five times in grayscale.
+  - `splits` contains the training dataset splits that allowed for the calculation of the baseline Fréchet distances.
+- The `logs` subdirectory contains saved results and other summaries.
+  - `aucs` contains the areas under the receiver operating characteristic curves for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`.
+  - `dists` contains the reconstruction scoring metrics for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`. The Needles and Ascites datasets also have `seed{seed}` in the filenames associated with the images used for Table 4 (anomaly localization).
+  - `fds` contains the logs of the Fréchet distances. `{modal}_{data1}_{data2}_{fd}_{itr}.txt` files are the original output files for the Fréchet Inception and Fréchet SwAV distances, with `modal` referring to the modality, `data` referring to the two datasets used in the calculation (`r` refers to real, `g` generated, `gb` Gaussian blur applied to real, `gn` Gaussian noise applied to real), `fd` referring to the specific Fréchet distance, and `itr` detailing which of the 5 repetitions the calculation was. These raw results, along with the Fréchet Radiomics distances, were organized into `{modal}_{fd}.csv` files and summarized in `fd_results.xlsx`. `fd_for_permutation_csv` contains the same information but is in a column format that allows for the statistical testing scripts to be run.
+  - `imaging_information`
+  - `patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`. The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
 
 # Dependencies
 
