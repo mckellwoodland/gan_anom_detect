@@ -56,7 +56,8 @@ This project is mounted at `/Morfeus/McKell/public_githubs/gan_anom_detect`.
     - `GI patients with ascite (original).xlsx` is the original workbook from Dr. Gabriel Sawakuchi detailing the patients with ascites. The `xlsx` file without `original` contains the notes from Mais.
     - `Image_review_assessment.xlsx` contains the synthetic image assessment performed by Mais.
     - `MIDRC_downloaded_studies.csv` details the `Body Part Examined`, `Study Modality`, `Case ID`, `Study UID`, and `Filename` for all the downloaded MIDRC images, with the redacted images excluded. `MIDRC_Imaging_Studies_table.csv` is the original summary downloaded from MIDRC. I'm uncertain how it relates to the final datasets.
-  - `patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`. The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
+  - `patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`.
+    - The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
 
 # Dependencies
 
