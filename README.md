@@ -67,15 +67,27 @@ The original DICOM/NIfTI datasets can be found in the following locations
 
 | Dataset | Filepath |
 | ------- | -------- |
-| CT Baseline | /Morfeus/McKell/data/liver_data/XNAT_exports/dicoms/<br>/Morfeus/McKell/data/liver_data/contrast/original_nifty/<br>/Morfeus/McKell/data/liver_data/noncontrast/original_nifty/ |
-| Brain | /Morfeus/McKell/data/head_and_neck_data/original_dcm/ |
-| Cervix | /Morfeus/McKell/data/cervix_data/exports/ |
-| Head and Neck | /Morfeus/McKell/data/head_and_neck_data/original_dcm/ |
-| Lung | /Morfeus/McKell/data/head_and_neck_data/original_dcm/ |
-| Needles | /Morfeus/McKell/data/GAN_based_AD/needles/dicom/ |
-| Ascites | /Morfeus/McKell/data/GAN_based_AD/AD/ascites/dicom/ |
-| Radiography Baseline | /Morfeus/McKell/data/chestxray14/images/ |
-| Radiography Test Datasets | /Morfeus/McKell/data/chest/unzip/CR/<br>/Morfeus/McKell/data/chest/unzip/DX/<br>/Morfeus/McKell/data/port_chest/unzip/CR/<br>/Morfeus/McKell/data/port_chest/unzip/DX/ |
+| CT Baseline | `/Morfeus/McKell/data/liver_data/XNAT_exports/dicoms/`<br>`/Morfeus/McKell/data/liver_data/contrast/original_nifty/`<br>`/Morfeus/McKell/data/liver_data/noncontrast/original_nifty/` |
+| Brain | `/Morfeus/McKell/data/head_and_neck_data/original_dcm/` |
+| Cervix | `/Morfeus/McKell/data/cervix_data/exports/` |
+| Head and Neck | `/Morfeus/McKell/data/head_and_neck_data/original_dcm/` |
+| Lung | `/Morfeus/McKell/data/head_and_neck_data/original_dcm/` |
+| Needles | `/Morfeus/McKell/data/GAN_based_AD/needles/dicom/` |
+| Ascites | `/Morfeus/McKell/data/GAN_based_AD/AD/ascites/dicom/` |
+| Radiography Baseline | `/Morfeus/McKell/data/chestxray14/images/` |
+| Radiography Test Datasets | `/Morfeus/McKell/data/chest/unzip/CR/`<br>`/Morfeus/McKell/data/chest/unzip/DX/`<br>`/Morfeus/McKell/data/port_chest/unzip/CR/`<br>`/Morfeus/McKell/data/port_chest/unzip/DX/` |
+
+Kubernetes YAML files can be found in `/Morfeus/McKell/k8s-templates/`
+
+| YAML File | Bash Script |
+| --------- | ----------- |
+| `evaluate.fd` | `eval_fd.sh` |
+| `evaluate.frd` | `eval_frd.sh` |
+| `evaluate.reconstructions` | `eval_recon.sh` |
+| `generate.stylegan2` | `generator.sh` |
+| `project.stylegan2` | `projector.sh` |
+| `train.stylegan2` | `train.sh` |
+
 
 # Dependencies
 
