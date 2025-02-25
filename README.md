@@ -53,11 +53,15 @@ This project is mounted at `/Morfeus/McKell/public_githubs/gan_anom_detect`.
     - `{dataset}_{patient/imaging}_information.{csv/xlsx}` separates the characteristics by dataset (if neither `patient` nor `imaging` is specified, the file contains both). These characteristics come directly from the DICOM tags, except for ChestX-ray14 where the file was downloaded from [Box](https://nihcc.app.box.com/v/ChestXray-NIHCC/file/219760887468). The baseline datasets were further separated by source (`brian` refers to Dr. Brian Anderson's [original liver CT dataset](https://www.sciencedirect.com/science/article/pii/S2452109420301172), `XNAT`). `{chest/port_chest}_{DX/CR}` splits up the MIDRC images by body part examined and modality - I'm uncertain if the mapping to PNGs is correct.
     - `ct_mrns.xlsx` shows the MRNs for all patients in the CT datasets. Images associated with the MRNs that are shared between the Baseline and Needles datasets were removed from the final Needles dataset.
     - `ct_patient_information.xlsx` contains the MRNs, sex, and age of all 492 patients in the CT datasets.
-    - `GI patients with ascite (original).xlsx` is the original workbook from Dr. Gabriel Sawakuchi detailing the patients with ascites. The `xlsx` file without `original` contains the notes from Mais.
+    - `GI patients with ascites (original).xlsx` is the original workbook from Dr. Gabriel Sawakuchi detailing the patients with ascites. The `xlsx` file without `original` contains the notes from Mais.
     - `Image_review_assessment.xlsx` contains the synthetic image assessment performed by Mais.
     - `MIDRC_downloaded_studies.csv` details the `Body Part Examined`, `Study Modality`, `Case ID`, `Study UID`, and `Filename` for all the downloaded MIDRC images, with the redacted images excluded. `MIDRC_Imaging_Studies_table.csv` is the original summary downloaded from MIDRC. I'm uncertain how it relates to the final datasets.
   - `patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`.
     - The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
+  - The `notebooks` subdirectory contains Jupyter notebooks for the project. These notebooks were used for code development and are not as well formulated/maintained as the scripts.
+    - `create_imaging_studies.ipynb` was used to create the `MIDRC_downloaded_studies.csv` log file.
+    - `get_dicom_headings.ipynb` was used to create the `{patient/imaging} information` files.
+    - `MIDRC_metadata.ipynb` was used to compile imaging and demographic information on the MIDRC images.
 
 # Dependencies
 
