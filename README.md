@@ -58,10 +58,24 @@ This project is mounted at `/Morfeus/McKell/public_githubs/gan_anom_detect`.
     - `MIDRC_downloaded_studies.csv` details the `Body Part Examined`, `Study Modality`, `Case ID`, `Study UID`, and `Filename` for all the downloaded MIDRC images, with the redacted images excluded. `MIDRC_Imaging_Studies_table.csv` is the original summary downloaded from MIDRC. I'm uncertain how it relates to the final datasets.
   - `patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`.
     - The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
-  - The `notebooks` subdirectory contains Jupyter notebooks for the project. These notebooks were used for code development and are not as well formulated/maintained as the scripts.
-    - `create_imaging_studies.ipynb` was used to create the `MIDRC_downloaded_studies.csv` log file.
-    - `get_dicom_headings.ipynb` was used to create the `{patient/imaging} information` files.
-    - `MIDRC_metadata.ipynb` was used to compile imaging and demographic information on the MIDRC images.
+- The `notebooks` subdirectory contains Jupyter notebooks for the project. These notebooks were used for code development and are not as well formulated/maintained as the scripts.
+  - `create_imaging_studies.ipynb` was used to create the `MIDRC_downloaded_studies.csv` log file.
+  - `get_dicom_headings.ipynb` was used to create the `{patient/imaging} information` files.
+  - `MIDRC_metadata.ipynb` was used to compile imaging and demographic information on the MIDRC images.
+ 
+The original DICOM/NIfTI datasets can be found in the following locations
+
+| Dataset | Filepath |
+| ------- | -------- |
+| CT Baseline | /Morfeus/McKell/data/liver_data/XNAT_exports/dicoms/<br>/Morfeus/McKell/data/liver_data/contrast/original_nifty/<br>/Morfeus/McKell/data/liver_data/noncontrast/original_nifty/ |
+| Brain | /Morfeus/McKell/data/head_and_neck_data/original_dcm/ |
+| Cervix | /Morfeus/McKell/data/cervix_data/exports/ |
+| Head and Neck | /Morfeus/McKell/data/head_and_neck_data/original_dcm/ |
+| Lung | /Morfeus/McKell/data/head_and_neck_data/original_dcm/ |
+| Needles | /Morfeus/McKell/data/GAN_based_AD/needles/dicom/ |
+| Ascites | /Morfeus/McKell/data/GAN_based_AD/AD/ascites/dicom/ |
+| Radiography Baseline | /Morfeus/McKell/data/chestxray14/images/ |
+| Radiography Test Datasets | /Morfeus/McKell/data/chest/unzip/CR/<br>/Morfeus/McKell/data/chest/unzip/DX/<br>/Morfeus/McKell/data/port_chest/unzip/CR/<br>/Morfeus/McKell/data/port_chest/unzip/DX/ |
 
 # Dependencies
 
