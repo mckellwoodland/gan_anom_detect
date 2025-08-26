@@ -27,7 +27,7 @@ M. Woodland, M. Al Taie, C. O'Connor, O. Lebimoyo, J.P. Yung, P.E. Kinahan, C.D.
 > **Conclusion:**
 > *Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large repository data curation.*
 
-This work has been submitted to *Radiology: Artificial Intelligence* for possible publication.
+This work has been submitted to a journal for possible publication.
 It is an expansion of the extended abstract titled *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>1</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
 It was extended with the anomaly localization evaluation, the data curation application, and the generative modeling evaluation.
 
