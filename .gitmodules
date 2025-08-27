@@ -4,3 +4,6 @@
 [submodule "PyTorch-StudioGAN"]
 	path = PyTorch-StudioGAN
 	url = https://github.com/mckellwoodland/PyTorch-StudioGAN/
+[submodule "Fast-DDPM"]
+	path = Fast-DDPM
+	url = https://github.com/mckellwoodland/Fast-DDPM
