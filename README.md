@@ -77,7 +77,7 @@ The original DICOM/NIfTI datasets can be found in the following locations
 | Radiography Baseline | `/Morfeus/McKell/data/chestxray14/images/` |
 | Radiography Test Datasets | `/Morfeus/McKell/data/chest/unzip/CR/`<br>`/Morfeus/McKell/data/chest/unzip/DX/`<br>`/Morfeus/McKell/data/port_chest/unzip/CR/`<br>`/Morfeus/McKell/data/port_chest/unzip/DX/` |
 
-Kubernetes YAML files can be found in `/Morfeus/McKell/k8s-templates/`
+Kubernetes YAML files can be found in `/Morfeus/McKell/k8s-templates.old.20250417/`
 
 | YAML File | Bash Script |
 | --------- | ----------- |
