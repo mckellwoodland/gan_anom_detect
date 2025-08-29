@@ -27,67 +27,9 @@ M. Woodland, M. Al Taie, C. O'Connor, O. Lebimoyo, J.P. Yung, P.E. Kinahan, C.D.
 > **Conclusion:**
 > *Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large repository data curation.*
 
-This work has been submitted to *Radiology: Artificial Intelligence* for possible publication.
+This work has been submitted to a journal for possible publication.
 It is an expansion of the extended abstract titled *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>1</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
 It was extended with the anomaly localization evaluation, the data curation application, and the generative modeling evaluation.
-
-# MD Anderson Information Only
-
-This project is mounted at `/Morfeus/McKell/public_githubs/gan_anom_detect`.
-- The `figures` subdirectory contains the `.pptx` and `.png` files for each figure in the paper.
-- The `gan_training` subdirectory contains the output files for the ChestX-ray14 and liver StyleGAN2 model training.
-- The `images` subdirectory contains the PNGS.
-  - `generated` contains 50,000 generated images, repeated five times with different random seeds, per StyleGAN2 model.
-  - `original` contains the PNGs used for training and testing.
-  - `patches` contains the highest scoring patches with their associated reconstructions on their right for each reconstruction scoring function and patch size, repeated with five random seeds.
-  - `reconstructed` contains the images that were reconstructed via backpropagation on a trained StyleGAN2 model. Only Needles and Ascites were reconstructed five times in grayscale.
-  - `splits` contains the training dataset splits that allowed for the calculation of the baseline Fréchet distances.
-- The `logs` subdirectory contains saved results and other summaries.
-  - `aucs` contains the areas under the receiver operating characteristic curves for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`.
-  - `dists` contains the reconstruction scoring metrics for the study with filenames organized as `{dataset name}_{scoring function}_{scoring area}.csv`. The Needles and Ascites datasets also have `seed{seed}` in the filenames associated with the images used for Table 4 (anomaly localization).
-  - `fds` contains the logs of the Fréchet distances.
-    - `{modal}_{data1}_{data2}_{fd}_{itr}.txt` files are the original output files for the Fréchet Inception and Fréchet SwAV distances, with `modal` referring to the modality, `data` referring to the two datasets used in the calculation (`r` refers to real, `g` generated, `gb` Gaussian blur applied to real, `gn` Gaussian noise applied to real), `fd` referring to the specific Fréchet distance, and `itr` detailing which of the 5 repetitions the calculation was.
-    - These raw results, along with the Fréchet Radiomics distances, were organized into `{modal}_{fd}.csv` files and summarized in `fd_results.xlsx`.
-    - `fd_for_permutation_csv` contains the same information but is in a column format that allows for the statistical testing scripts to be run.
-  - `imaging_information` contains the patient demographics and clinical imaging characteristics of the utilized images.
-    - `{dataset}_{patient/imaging}_information.{csv/xlsx}` separates the characteristics by dataset (if neither `patient` nor `imaging` is specified, the file contains both). These characteristics come directly from the DICOM tags, except for ChestX-ray14 where the file was downloaded from [Box](https://nihcc.app.box.com/v/ChestXray-NIHCC/file/219760887468). The baseline datasets were further separated by source (`brian` refers to Dr. Brian Anderson's [original liver CT dataset](https://www.sciencedirect.com/science/article/pii/S2452109420301172), `XNAT`). `{chest/port_chest}_{DX/CR}` splits up the MIDRC images by body part examined and modality - I'm uncertain if the mapping to PNGs is correct.
-    - `ct_mrns.xlsx` shows the MRNs for all patients in the CT datasets. Images associated with the MRNs that are shared between the Baseline and Needles datasets were removed from the final Needles dataset.
-    - `ct_patient_information.xlsx` contains the MRNs, sex, and age of all 492 patients in the CT datasets.
-    - `GI patients with ascites (original).xlsx` is the original workbook from Dr. Gabriel Sawakuchi detailing the patients with ascites. The `xlsx` file without `original` contains the notes from Mais.
-    - `Image_review_assessment.xlsx` contains the synthetic image assessment performed by Mais.
-    - `MIDRC_downloaded_studies.csv` details the `Body Part Examined`, `Study Modality`, `Case ID`, `Study UID`, and `Filename` for all the downloaded MIDRC images, with the redacted images excluded. `MIDRC_Imaging_Studies_table.csv` is the original summary downloaded from MIDRC. I'm uncertain how it relates to the final datasets.
-  - `patches` contains the decisions on whether a patch contained an enumerated anomaly in `{ascites/needles}.xlsx`.
-    - The final proportions were extracted and put in `{ascites/needles}_proportions.csv`, which were used for statistical testing.
-- The `notebooks` subdirectory contains Jupyter notebooks for the project. These notebooks were used for code development and are not as well formulated/maintained as the scripts.
-  - `create_imaging_studies.ipynb` was used to create the `MIDRC_downloaded_studies.csv` log file.
-  - `get_dicom_headings.ipynb` was used to create the `{patient/imaging} information` files.
-  - `MIDRC_metadata.ipynb` was used to compile imaging and demographic information on the MIDRC images.
- 
-The original DICOM/NIfTI datasets can be found in the following locations
-
-| Dataset | Filepath |
-| ------- | -------- |
-| CT Baseline | `/Morfeus/McKell/data/liver_data/XNAT_exports/dicoms/`<br>`/Morfeus/McKell/data/liver_data/contrast/original_nifty/`<br>`/Morfeus/McKell/data/liver_data/noncontrast/original_nifty/` |
-| Brain | `/Morfeus/McKell/data/head_and_neck_data/original_dcm/` |
-| Cervix | `/Morfeus/McKell/data/cervix_data/exports/` |
-| Head and Neck | `/Morfeus/McKell/data/head_and_neck_data/original_dcm/` |
-| Lung | `/Morfeus/McKell/data/head_and_neck_data/original_dcm/` |
-| Needles | `/Morfeus/McKell/data/GAN_based_AD/needles/dicom/` |
-| Ascites | `/Morfeus/McKell/data/GAN_based_AD/AD/ascites/dicom/` |
-| Radiography Baseline | `/Morfeus/McKell/data/chestxray14/images/` |
-| Radiography Test Datasets | `/Morfeus/McKell/data/chest/unzip/CR/`<br>`/Morfeus/McKell/data/chest/unzip/DX/`<br>`/Morfeus/McKell/data/port_chest/unzip/CR/`<br>`/Morfeus/McKell/data/port_chest/unzip/DX/` |
-
-Kubernetes YAML files can be found in `/Morfeus/McKell/k8s-templates.old.20250417/`
-
-| YAML File | Bash Script |
-| --------- | ----------- |
-| `evaluate.fd` | `eval_fd.sh` |
-| `evaluate.frd` | `eval_frd.sh` |
-| `evaluate.reconstructions` | `eval_recon.sh` |
-| `generate.stylegan2` | `generator.sh` |
-| `project.stylegan2` | `projector.sh` |
-| `train.stylegan2` | `train.sh` |
-
 
 # Dependencies
 
