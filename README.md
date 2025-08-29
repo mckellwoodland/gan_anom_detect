@@ -63,7 +63,7 @@ docker build --tag studiogan:latest PyTorch-StudioGAN/.
 
 To use the Fast-DDPM<sup>4</sup> for submodule, you can use the following container:
 ```
-docker build --tag fastddpm Fast-DDPM/.
+docker build --tag fastddpm:latest Fast-DDPM/.
 ```
 
 Lastly, the following Docker container is compatible with the `frd-score` Python package<sup>5</sup>.
