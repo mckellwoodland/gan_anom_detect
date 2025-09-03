@@ -1,6 +1,6 @@
 data/
 figures/
-gan_training/
+generative_modeling/
 images/
 models/
 notebooks/
