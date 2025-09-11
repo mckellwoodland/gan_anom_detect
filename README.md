@@ -156,7 +156,7 @@ Options:
   --help                          Show this message and exit.
 ```
 
-# Train DDPM Models
+# DDPM Models
 
 Train a Fast-DDPM<sup>4</sup> model with the Fast-DDPM repository (forked) by providing the `--config`, `--dataset`, `--exp`, and `--doc` arguments to `bash_scripts/train_fast_ddpm.sh` script.
 The provided "Optional Arguments" were the hyperparameters used to train models in our study.
@@ -197,6 +197,8 @@ options:
   --eta ETA             eta used to control the variances of sigma
   --sequence
 ```
+
+The Fast-DDPM models can be sampled by providing the same arguments to `bash_scripts/sample_fast_ddpm.sh` script.
 
 # Evaluating Generative Quality
 
