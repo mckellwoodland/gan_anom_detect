@@ -1,33 +1,28 @@
-# Generative Modeling for Interpretable Failure Detection in Liver CT Segmentation and Scalable Data Curation of Chest Radiographs - Official Repository
+# Generative Modeling for Interpretable Anomaly Detection in Medical Imaging: Applications in Failure Detection and Data Curation - Official Repository
 
 <p><img src="https://github.com/mckellwoodland/gan_anom_detect/blob/main/github_figures/graphical_abstract.png"</p>
   
-**Generative Modeling for Interpretable Failure Detection in Liver CT Segmentation and Scalable Data Curation of Chest Radiographs**
+**Generative Modeling for Interpretable Anomaly Detection in Medical Imaging: Applications in Failure Detection and Data Curation**
 
-M. Woodland, M. Al Taie, C. O'Connor, O. Lebimoyo, J.P. Yung, P.E. Kinahan, C.D. Fuller, B.C. Odisio, A.B. Patel, & K.K. Brock
+M.E. Woodland, M. Altaie, C.S. O'Connor, A.H. Castelo, O.C. Lebimoyo, A.C. Gupta, J.P. Yung, P.E. Kinahan, C.D. Fuller, E.J. Koay, B.C. Odisio, A.B. Patel, & K.K. Brock
 
 **Abstract**
-> **Purpose:**
-> *To leverage generative modeling-based anomaly detection in two radiological applications, namely, providing interpretability for model failure prediction and enabling scalable data curation for large repositories.*
-> 
-> **Materials and Methods:**
-> *This retrospective study utilized 3,306 CT scans for failure prediction, divided patient-wise into training, baseline test, and anomaly (attributes that cause liver segmentation failures—e.g., needles, ascites) test datasets.
-> For data curation, 112,120 ChestX-ray14 radiographs were used for training, and 2,307 radiographs from The Medical Imaging and Data Resource Center for testing, categorized as baseline or anomalous based on attribute alignment with ChestX-ray14.
-> StyleGAN2 networks modeled the training distributions. Test images were reconstructed with backpropagation and scored using mean squared error (MSE) and Wasserstein distance (WD).
-> Scores should be large for anomalous images since StyleGAN2 cannot model unseen attributes.
-> Area under the receiver operating characteristic curve (AUROC) assessed anomaly detection, i.e., differentiating the baseline and anomaly datasets.
-> The proportion of highest-scoring patches containing needles or ascites assessed anomaly localization (interpretability).
-> Permutation tests determined statistical significance.
-> The code and ChestX-ray14 weights are available at .*
-> 
-> **Results:**
-> *StyleGAN2 did not reconstruct anomalous attributes (e.g., needles, ascites), enabling the unsupervised detection of attributes that cause model failure or deviate from ChestX-ray14—mean (± standard deviation) AUROCs of 0.82 (±0.16) and 0.82 (±0.11), respectively.
-> 71% (±3%) of the needles and ascites were localized. WD outperformed MSE on CT (p<.001), while MSE outperformed WD on radiography (p<.001).*
-> 
-> **Conclusion:**
-> *Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large repository data curation.*
+> *This work aims to leverage generative modeling-based anomaly detection to enhance interpretability in AI failure detection systems and to aid data curation for large repositories.*
+> *For failure detection interpretability, this retrospective study utilized 3339 CT scans (525 patients), divided patient-wise into training, baseline test, and anomaly (having failure-causing attributes—e.g., needles, ascites) test datasets.*
+> *For data curation, 112,120 ChestX-ray14 radiographs were used for training and 2036 radiographs from the Medical Imaging and Data Resource Center for testing, categorized as baseline or anomalous based on attribute alignment with ChestX-ray14.*
+> *StyleGAN2 networks modeled the training distributions.*
+> *Test images were reconstructed with backpropagation and scored using mean squared error (MSE) and Wasserstein distance (WD).*
+> *Scores should be high for anomalous images, as StyleGAN2 cannot model unseen attributes.*
+> *Area under the receiver operating characteristic curve (AUROC) evaluated anomaly detection, i.e., baseline and anomaly dataset differentiation.*
+> *The proportion of highest-scoring patches containing needles or ascites assessed anomaly localization.*
+> *Permutation tests determined statistical significance.*
+> *Code and ChestX-ray14 weights are available at https://github.com/mckellwoodland/gan_anom_detect.*
+>  *StyleGAN2 did not reconstruct anomalous attributes (e.g., needles, ascites), enabling the unsupervised detection of these attributes: mean (± standard deviation) AUROCs were 0.86 (±0.13) for failure detection and 0.82 (±0.11) for data curation.*
+> *81% (±13%) of the needles and ascites were localized.*
+> *WD outperformed MSE on CT (p < .001 ), while MSE outperformed WD on radiography (p < .001 ).*
+> *Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large-scale data curation.*
 
-This work has been submitted to a journal for possible publication.
+This work will be published in *Bioengineering*.
 It is an expansion of the extended abstract titled *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>1</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
 It was extended with the anomaly localization evaluation, the data curation application, and the generative modeling evaluation.
 
@@ -43,7 +38,7 @@ Our Python scripts can be run directly after entering the Docker container
 ```
 docker run -it --rm -v $(pwd):/workspace gan_anom_detect /bin/bash
 ```
-and providing the appropriate Python commands arguments or by editing the bash scripts with your arguments. 
+and providing the appropriate Python command arguments, or by editing the bash scripts with your arguments. 
 The bash script will run the container and provide the arguments to the script for you. 
 You will need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
 
@@ -56,14 +51,9 @@ To use the StudioGAN<sup>3</sup> fork submodule, you can pull the following cont
 ```
 docker pull alex4727/experiment:pytorch113_cuda116
 ```
-To use our bash scripts, you'll need the following Docker container which updated the PyTorch version:
+To use our bash scripts, you'll need the following Docker container, which updates the PyTorch version:
 ```
 docker build --tag studiogan:latest PyTorch-StudioGAN/.
-```
-
-To use the Fast-DDPM<sup>4</sup> for submodule, you can use the following container:
-```
-docker build --tag fastddpm:latest Fast-DDPM/.
 ```
 
 Lastly, the following Docker container is compatible with the `frd-score` Python package<sup>5</sup>.
@@ -75,7 +65,7 @@ docker build --tag frd:latest frd/.
 
 Train a StyleGAN2-ADA<sup>1</sup> model with the StyleGAN2-ADA repository (forked) by providing the `--outdir` and `--data` arguments to the `train_stylegan2.sh` script.
 The provided `Optional Arguments` in the script were the hyperparameters used to train models in our study.
-While the official repository and this study works with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
+While the official repository and this study work with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
 
 ```
 ./bash_scripts/train_stylegan2.sh
@@ -155,50 +145,6 @@ Options:
   --beta0 FLOAT                   Beta_0
   --help                          Show this message and exit.
 ```
-
-# DDPM Models
-
-Train a Fast-DDPM<sup>4</sup> model with the Fast-DDPM repository (forked) by providing the `--config`, `--dataset`, `--exp`, and `--doc` arguments to `bash_scripts/train_fast_ddpm.sh` script.
-The provided "Optional Arguments" were the hyperparameters used to train models in our study.
-
-```
-./bash_scripts/train_fast_ddpm.sh
-```
-```
-usage: fast_ddpm_main.py [-h] [--config CONFIG] [--dataset DATASET] [--seed SEED] [--exp EXP] [--doc DOC]
-                         [--comment COMMENT] [--verbose VERBOSE] [--test] [--sample] [--fid] [--interpolation]
-                         [--resume_training] [-i IMAGE_FOLDER] [--ni] [--use_pretrained] [--sample_type SAMPLE_TYPE]
-                         [--scheduler_type SCHEDULER_TYPE] [--timesteps TIMESTEPS] [--eta ETA] [--sequence]
-
-options:
-  -h, --help            show this help message and exit
-  --config CONFIG       Path to the config file
-  --dataset DATASET     Name of dataset(LDFDCT, BRATS, PMUB)
-  --seed SEED           Random seed
-  --exp EXP             Path for saving running related data.
-  --doc DOC             A string for documentation purpose. Will be the name of the log folder.
-  --comment COMMENT     A string for experiment comment
-  --verbose VERBOSE     Verbose level: info | debug | warning | critical
-  --test                Whether to test the model
-  --sample              Whether to produce samples from the model
-  --fid
-  --interpolation
-  --resume_training     Whether to resume training
-  -i IMAGE_FOLDER, --image_folder IMAGE_FOLDER
-                        The folder name of samples
-  --ni                  No interaction. Suitable for Slurm Job launcher
-  --use_pretrained
-  --sample_type SAMPLE_TYPE
-                        sampling approach (generalized or ddpm_noisy)
-  --scheduler_type SCHEDULER_TYPE
-                        sample involved time steps according to (uniform or non-uniform)
-  --timesteps TIMESTEPS
-                        number of steps involved
-  --eta ETA             eta used to control the variances of sigma
-  --sequence
-```
-
-The Fast-DDPM models can be sampled by providing the same arguments to `bash_scripts/sample_fast_ddpm.sh` script.
 
 # Evaluating Generative Quality
 
@@ -375,7 +321,7 @@ Optional Arguments:
                         The region of the image that the reconstruction metric should be calculated on. Options: ["full","body","patch"]. Default: "full".
 ```
 
-The baseline test dataset and each anomaly test dataset must be placed in separate directories prior to the distance calculations.
+The baseline test dataset and each anomaly test dataset must be placed in separate directories before the distance calculations.
 Distances must be calculated on each test directory, resulting in a CSV file of distances for each test dataset.
 
 # Evaluate Anomaly Detection
@@ -407,7 +353,7 @@ Optional Arguments:
 
 # Statistical Testing
 
-Permutation tests can be performed with `permutation_test.sh` by providing paths to the CSV files with bootstrapped AUROCs to be compared `--csv1` and `--csv1`.
+Permutation tests can be performed with `permutation_test.sh` by providing paths to the CSV files with bootstrapped AUROCs to be compared, `--csv1` and `--csv2`.
 This is a one-sided permutation test that evaluates whether the mean of the first population is larger than the mean of the second.
 The simulated power of each calculation will be printed, along with the p-value of the executed test.
 By default, 100,000 permutations will be performed for each test.
@@ -440,7 +386,7 @@ Optional Arguments:
 
 The data from The University of Texas MD Anderson Cancer Center may be made available upon request, in compliance with institutional review board requirements.
 
-Data can be windowed with `window_level.sh` by providing the directory containing the images to be windowed in NIfTI format `--in_dir` and the output directory `--out_dir`.
+Data can be windowed with `window_level.sh` by providing the directory containing the images to be windowed in NIfTI format, `--in_dir`, and the output directory `--out_dir`.
 Window width and level can be changed from the defaults of 350 and 50 with `--window_width` and `--window_level`.
 ```
 ./bash_scripts/window_level.sh
@@ -518,7 +464,7 @@ Required Arguments:
 ### Chest Radiograph
 
 The ChestX-ray14<sup>10</sup> dataset is downloadable from [Box](https://nihcc.app.box.com/v/ChestXray-NIHCC).
-Images can be rescaled to 512x512 with `rescale_images.sh` by providing the paths to the directory containing the original images `--in_dir` and the directory to put the resized images into `--out_dir`.
+Images can be rescaled to 512x512 with `rescale_images.sh` by providing the paths to the directory containing the original images, `--in_dir`, and the directory to put the resized images into, `--out_dir`.
 
 ```
 ./bash_scripts/rescale_images.sh
@@ -538,7 +484,7 @@ Optional Arguments:
 ```
 
 All available chest radiographs were downloaded from the [Medical Imaging and Data Resource Center (MIDRC)](https://www.midrc.org/) in November 2022.
-Specifically, under "Body Part Examined", "CHEST" and "PORT CHEST" were selected and "DX" and "CR" were selected under "Study Modality".
+Specifically, under "Body Part Examined", "CHEST" and "PORT CHEST" were selected, and "DX" and "CR" were selected under "Study Modality".
 The exact Case IDs, Study UIDs, and filenames associated with the 64,373 radiographs downloaded are available via request for replication purposes, in compliance with MIDRC policies.
 
 The `preprocess_midrc` script can be used to perform the preprocessing: slice, resize to 512x512, rescale to [0, 255], convert to unsigned 8-bit integers, and write to PNG.
@@ -609,7 +555,8 @@ Research reported in this publication was supported in part by resources of the 
 by the National Institutes of Health/National Cancer Institute under award numbers P30CA016672, R01CA235564, and R01CA221971; 
 by the Diagnostic Imaging – Summer Training and Experiences Partnership (DI-STEP); 
 by the Tumor Measurement Initiative through the MD Anderson Strategic Initiative Development Program (STRIDE); 
-by the Helen Black Image Guided Fund; and by a generous gift from the Apache Corporation. 
+by the Helen Black Image Guided Fund; 
+and by a generous gift from the Apache Corporation. 
 
 The imaging and associated clinical data downloaded from MIDRC (The Medical Imaging and Data Resource Center) and used for research in this publication were made possible by the National Institute of Biomedical Imaging and Bioengineering (NIBIB) of the National Institutes of Health under contract 75N92020D00021. 
 The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health.
