@@ -483,11 +483,11 @@ Optional Arguments:
                         Desired output resolution. Defaults to 512.
 ```
 
-All available chest radiographs were downloaded from the [Medical Imaging and Data Resource Center (MIDRC)](https://www.midrc.org/) in November 2022.
+All available chest radiographs were downloaded from the [Medical Imaging and Data Resource Center (MIDRC)](https://www.midrc.org/) in October 2022.
 Specifically, under "Body Part Examined", "CHEST" and "PORT CHEST" were selected, and "DX" and "CR" were selected under "Study Modality".
 The exact Case IDs, Study UIDs, and filenames associated with the 64,373 radiographs downloaded are available via request for replication purposes, in compliance with MIDRC policies.
 
-The `preprocess_midrc` script can be used to perform the preprocessing: slice, resize to 512x512, rescale to [0, 255], convert to unsigned 8-bit integers, and write to PNG.
+The `preprocess_midrc` script can be used to perform preprocessing: slice, resize to 512x512, rescale to the range [0, 255], convert to unsigned 8-bit integers, and write the result to PNG.
 The DICOMs within `--in_dir` should be organized first by the body part examined and then by the modality.
 
 ```
