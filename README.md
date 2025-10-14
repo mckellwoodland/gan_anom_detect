@@ -1,6 +1,6 @@
 # Generative Modeling for Interpretable Anomaly Detection in Medical Imaging: Applications in Failure Detection and Data Curation - Official Repository
 
-<p><img src="https://github.com/mckellwoodland/gan_anom_detect/blob/main/github_figures/graphical_abstract.png"</p>
+<p><img src="https://github.com/mckellwoodland/gan_anom_detect/blob/main/github_figures/stylegan2_ad_pipeline.png"</p>
   
 **Generative Modeling for Interpretable Anomaly Detection in Medical Imaging: Applications in Failure Detection and Data Curation**
 
