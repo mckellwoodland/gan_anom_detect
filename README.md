@@ -22,7 +22,7 @@ M.E. Woodland, M. Altaie, C.S. O'Connor, A.H. Castelo, O.C. Lebimoyo, A.C. Gupta
 > *WD outperformed MSE on CT (p < .001 ), while MSE outperformed WD on radiography (p < .001 ).*
 > *Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large-scale data curation.*
 
-This work will be published in *Bioengineering*.
+This work is published in [*Bioengineering*](https://doi.org/10.3390/bioengineering12101106).
 It is an expansion of the extended abstract titled *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>1</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
 It was extended with the anomaly localization evaluation, the data curation application, and the generative modeling evaluation.
 
@@ -563,16 +563,19 @@ The content is solely the responsibility of the authors and does not necessarily
 
 # Citation
 
-If you have found our work useful, we would appreciate a citation to our extended abstract.
+If you have found our work useful, we would appreciate a citation to our manuscript.
 ```
-@misc{woodland2023stylegan2basedoutofdistributiondetectionmedical,
-      title={StyleGAN2-based Out-of-Distribution Detection for Medical Imaging}, 
-      author={McKell Woodland and John Wood and Caleb O'Connor and Ankit B. Patel and Kristy K. Brock},
-      year={2023},
-      eprint={2307.10193},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV},
-      url={https://arxiv.org/abs/2307.10193}, 
+@Article{bioengineering12101106,
+  AUTHOR = {Woodland, McKell E. and Altaie, Mais and O’Connor, Caleb S. and Castelo, Austin H. and Lebimoyo, Olubunmi C. and Gupta, Aashish C. and Yung,             Joshua P. and Kinahan, Paul E. and Fuller, Clifton D. and Koay, Eugene J. and Odisio, Bruno C. and Patel, Ankit B. and Brock, Kristy K.},
+  TITLE = {Generative Modeling for Interpretable Anomaly Detection in Medical Imaging: Applications in Failure Detection and Data Curation},
+  JOURNAL = {Bioengineering},
+  VOLUME = {12},
+  YEAR = {2025},
+  NUMBER = {10},
+  ARTICLE-NUMBER = {1106},
+  URL = {https://www.mdpi.com/2306-5354/12/10/1106},
+  ISSN = {2306-5354},
+  DOI = {10.3390/bioengineering12101106}
 }
 ```
 
