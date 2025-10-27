@@ -16,14 +16,12 @@ M.E. Woodland, M. Altaie, C.S. O'Connor, A.H. Castelo, O.C. Lebimoyo, A.C. Gupta
 > *Area under the receiver operating characteristic curve (AUROC) evaluated anomaly detection, i.e., baseline and anomaly dataset differentiation.*
 > *The proportion of highest-scoring patches containing needles or ascites assessed anomaly localization.*
 > *Permutation tests determined statistical significance.*
-> *Code and ChestX-ray14 weights are available at https://github.com/mckellwoodland/gan_anom_detect.*
->  *StyleGAN2 did not reconstruct anomalous attributes (e.g., needles, ascites), enabling the unsupervised detection of these attributes: mean (± standard deviation) AUROCs were 0.86 (±0.13) for failure detection and 0.82 (±0.11) for data curation.*
-> *81% (±13%) of the needles and ascites were localized.*
-> *WD outperformed MSE on CT (p < .001 ), while MSE outperformed WD on radiography (p < .001 ).*
+> *StyleGAN2 did not reconstruct anomalous attributes (e.g., needles, ascites), enabling the unsupervised detection of these attributes: mean (±standard deviation) AUROCs were 0.86 (±0.13) for failure detection and 0.82 (±0.11) for data curation. 81% (±13%) of the needles and ascites were localized.*
+> *WD outperformed MSE on CT (p < 0.001), while MSE outperformed WD on radiography (p < 0.001).*
 > *Generative models detected anomalous image attributes, demonstrating promise for model failure detection interpretability and large-scale data curation.*
 
-This work is published in [*Bioengineering*](https://doi.org/10.3390/bioengineering12101106).
-It is an expansion of the extended abstract titled *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>1</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
+This work is published in [*Bioengineering*](https://doi.org/10.3390/bioengineering12101106)<sup>1</sup>.
+It is an expansion of the extended abstract *StyleGAN2-based Out-of-Distribution Detection for Medical Imaging*<sup>2</sup>, accepted to the *Medical Imaging Meets NeurIPS* workshop at NeurIPS 2022 ([abstract](https://www.cse.cuhk.edu.hk/~qdou/public/medneurips2022/125.pdf), [preprint](https://arxiv.org/abs/2307.10193)).
 It was extended with the anomaly localization evaluation, the data curation application, and the generative modeling evaluation.
 
 # Dependencies
@@ -42,12 +40,12 @@ and providing the appropriate Python command arguments, or by editing the bash s
 The bash script will run the container and provide the arguments to the script for you. 
 You will need to edit the above command or the bash scripts if you want a directory other than the current directory mounted.
 
-To use the StyleGAN2-ADA<sup>2</sup> fork submodule, you'll need the following container:
+To use the StyleGAN2-ADA<sup>3</sup> fork submodule, you'll need the following container:
 ```
 docker build --tag sg2ada:latest stylegan2-ada-pytorch/.
 ```
 
-To use the StudioGAN<sup>3</sup> fork submodule, you can pull the following container:
+To use the StudioGAN<sup>4</sup> fork submodule, you can pull the following container:
 ```
 docker pull alex4727/experiment:pytorch113_cuda116
 ```
@@ -63,7 +61,7 @@ docker build --tag frd:latest frd/.
 
 # Train a StyleGAN2-ADA Model
 
-Train a StyleGAN2-ADA<sup>1</sup> model with the StyleGAN2-ADA repository (forked) by providing the `--outdir` and `--data` arguments to the `train_stylegan2.sh` script.
+Train a StyleGAN2-ADA<sup>3</sup> model with the StyleGAN2-ADA repository (forked) by providing the `--outdir` and `--data` arguments to the `train_stylegan2.sh` script.
 The provided `Optional Arguments` in the script were the hyperparameters used to train models in our study.
 While the official repository and this study work with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
 
@@ -201,7 +199,7 @@ Required Arguments:
                         the "metric-fid50k_full" JSON file.
 ```
 
-Evaluate FID and Fréchet SwAV Distance (FSD)<sup>7</sup> with the StudioGAN<sup>3</sup> by providing `--dset1`, `--dset2`, `--eval_backbone` (either `InceptionV3_torch`<sup>8</sup> or `SwAV_torch`<sup>9</sup>), and `--out_path` to the `eval_fd.sh` script.
+Evaluate FID and Fréchet SwAV Distance (FSD)<sup>7</sup> with the StudioGAN<sup>4</sup> by providing `--dset1`, `--dset2`, `--eval_backbone` (either `InceptionV3_torch`<sup>8</sup> or `SwAV_torch`<sup>9</sup>), and `--out_path` to the `eval_fd.sh` script.
 The folder names within the `--dset1` and `--dset2` directories that contain the images to be evaluated must match (such as `class0`).
 The batch size `--batch_size` argument (defaults to `64`) can be updated if memory issues are encountered.
 
@@ -248,7 +246,7 @@ optional arguments:
   --out_path OUT_PATH   output file to put metrics into
 ```
 
-The Fréchet Radiomics Distance (FRD)<sup>4</sup> can be calculated by providing the paths to the two directories containing the datasets to be evaluated to `eval_frd.sh`.
+The Fréchet Radiomics Distance (FRD)<sup>5</sup> can be calculated by providing the paths to the two directories containing the datasets to be evaluated to `eval_frd.sh`.
 ```
 ./bash_scripts/eval_frd.sh
 ```
@@ -580,11 +578,11 @@ If you have found our work useful, we would appreciate a citation to our manuscr
 ```
 
 # References
-1. McKell Woodland *et al.* StyleGAN2-based out-of-distribution detection for medical imaging. arXiv:2307.10193. [Accepted abstract](https://arxiv.org/abs/2307.10193).
-2. Tero Karras *et al.* Training generative adversarial networks with limited data. In NeurIPS 2020; Curran Associates, Inc; 33:12104-12114; 2020. [Proceedings](https://proceedings.neurips.cc/paper/2020/hash/8d30aa96e72440759f74bd2306c1fa3d-Abstract.html).
-3. Minguk Kang *et al.* StudioGAN: A taxonomy and benchmark of GANs for image synthesis. TPAMI, 45(12):15725-15742. [Manuscript](https://ieeexplore.ieee.org/abstract/document/10224337).
-4. Hongxu Jiang *et al.* Fast-DDPM: Fast Denoising Diffusion Probabilistic Models for Medical Image-to-Image Generation. IEEE Journal of Biomedical and Health Informatics; 1-11; 2025. [article](https://ieeexplore.ieee.org/abstract/document/10979336)
-5. Osuala *et al.* Towards learning contrast kinetics with multi-condition latent diffusion models. In MICCAI 2024; Springer, Cham; 15005:713-723; 2024. [Proceedings](https://link.springer.com/chapter/10.1007/978-3-031-72086-4_67).
+1. McKell Woodland *et al.* Generative Modeling for Interpretable Anomaly Detection in Medical Imaging: Applications in Failure Detection and Data Curation. Bioengineering; 12(10):1106; 2025. [doi:10.3390/bioengineering12101106](https://doi.org/10.3390/bioengineering12101106)
+2. McKell Woodland *et al.* StyleGAN2-based out-of-distribution detection for medical imaging. arXiv:2307.10193. [arxiv:2307.10193](https://arxiv.org/abs/2307.10193).
+3. Tero Karras *et al.* Training generative adversarial networks with limited data. In NeurIPS 2020; Curran Associates, Inc; 33:12104-12114; 2020. [Proceedings](https://proceedings.neurips.cc/paper/2020/hash/8d30aa96e72440759f74bd2306c1fa3d-Abstract.html).
+4. Minguk Kang *et al.* StudioGAN: A taxonomy and benchmark of GANs for image synthesis. TPAMI, 45(12):15725-15742. [doi:10.1109/TPAMI.2023.3306436](https://ieeexplore.ieee.org/abstract/document/10224337).
+5. Osuala *et al.* Towards learning contrast kinetics with multi-condition latent diffusion models. In MICCAI 2024; Springer, Cham; 15005:713-723; 2024. [doi.org/10.1007/978-3-031-72086-4_67](https://link.springer.com/chapter/10.1007/978-3-031-72086-4_67).
 6. Martin Heusel *et al.* GANs trained by a two time-scale update rule converge to a local Nash equilibrium. In NIPS 2017; Curran Associates, Inc.; 30:6629-6640; 2017. [Proceedings](https://proceedings.neurips.cc/paper/2017/hash/8a1d694707eb0fefe65871369074926d-Abstract.html).
 7. Stanislav Morozov *et al.* On self-supervised image representations for GAN evaluation. In ICLR 2021; 2021. [OpenReview](https://openreview.net/forum?id=NeRdBeTionN)
 8. Christian Szegedy *et al.* Going deeper with convolutions. In CVPR 2015, IEEE, pp. 1-9, 2015.[Proceedings](https://openaccess.thecvf.com/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html).
