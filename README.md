@@ -63,7 +63,6 @@ docker build --tag frd:latest frd/.
 
 Train a StyleGAN2-ADA<sup>3</sup> model with the StyleGAN2-ADA repository (forked) by providing the `--outdir` and `--data` arguments to the `train_stylegan2.sh` script.
 The provided `Optional Arguments` in the script were the hyperparameters used to train models in our study.
-While the official repository and this study work with PNGs, you can train on NiFTI files using the `nifti` branch of our fork.
 
 ```
 ./bash_scripts/train_stylegan2.sh
