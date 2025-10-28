@@ -245,7 +245,8 @@ optional arguments:
   --out_path OUT_PATH   output file to put metrics into
 ```
 
-The Fréchet Radiomics Distance (FRD)<sup>5</sup> can be calculated by providing the paths to the two directories containing the datasets to be evaluated to `eval_frd.sh`.
+The Fréchet Radiomics Distance (FRD)<sup>5</sup> can be calculated by providing the paths to the two directories containing the images to be evaluated to `eval_frd.sh`.
+Note that the dataset directories for `eval_fd.sh` contain a folder, whereas the directories for `eval_frd.sh` contain images.
 ```
 ./bash_scripts/eval_frd.sh
 ```
