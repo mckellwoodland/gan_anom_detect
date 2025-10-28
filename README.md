@@ -253,7 +253,7 @@ Note that the dataset directories for `eval_fd.sh` contain a folder, whereas the
 
 # Reconstruct Images with StyleGAN2-ADA
 
-This code uses a fork of the official StyleGAN2-ADA repository to reconstruct the images with a trained StyleGAN2-ADA model via backpropagation. 
+This code utilizes a fork of the official StyleGAN2-ADA repository to reconstruct images using a trained StyleGAN2-ADA model via backpropagation. 
 You'll need to be on the `proj_dir` branch of the repository to use our expanded capabilities of reconstructing all images in a given directory and saving images in grayscale. 
 To reconstruct the images, provide the `--network`, `--target`, and `--outdir` arguments to the `projector.sh` script.
 The `--mode` optional argument can be changed to save images in color (defaults to grayscale).
@@ -353,7 +353,7 @@ Optional Arguments:
 
 Permutation tests can be performed with `permutation_test.sh` by providing paths to the CSV files with bootstrapped AUROCs to be compared, `--csv1` and `--csv2`.
 This is a one-sided permutation test that evaluates whether the mean of the first population is larger than the mean of the second.
-The simulated power of each calculation will be printed, along with the p-value of the executed test.
+The simulated power of each calculation will be printed, along with the *p*-value of the executed test.
 By default, 100,000 permutations will be performed for each test.
 For the simulated power, the default significance level is $$\alpha=.05$$ and the default number of simulations and permutations is 1,000.
 
